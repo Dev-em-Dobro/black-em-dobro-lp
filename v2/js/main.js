@@ -130,7 +130,7 @@ if (dock && hero && signup && "IntersectionObserver" in window) {
 
 /* Reveal ao rolar --------------------------------------------------------- */
 const revealTargets = document.querySelectorAll(
-  ".section-head, .narrative, .versus, .chips, .tile, .product, .receipt, .path, .timeline li, .mantra, .duo-card, .founders, .manifesto blockquote, .signup"
+  ".section-head, .narrative, .versus, .chips, .tile, .path, .timeline li, .mantra, .duo-card, .founders, .manifesto blockquote, .signup"
 );
 
 if ("IntersectionObserver" in window) {
