@@ -53,10 +53,16 @@
               <input name="email" type="email" autocomplete="email" maxlength="120" placeholder="Seu melhor e-mail" aria-label="Melhor e-mail" required>
               <small class="field-error"></small>
             </label>
-            <label class="field">
-              <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(11) 99999-9999" aria-label="WhatsApp com DDD" required>
+            <div class="field">
+              <span>WhatsApp</span>
+              <span class="phone-control">
+                <select name="countryCode" data-country-code aria-label="País e código telefônico">
+                  <option value="+55" selected>🇧🇷 +55</option>
+                </select>
+                <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="(11) 99999-9999" aria-label="WhatsApp" required>
+              </span>
               <small class="field-error"></small>
-            </label>
+            </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Quero entrar na lista</button>
             <p class="form-foot">Ao enviar, você concorda com a <a href="/privacidade.html">política de privacidade</a>.</p>
           </form>
@@ -338,11 +344,16 @@
               <input name="email" type="email" autocomplete="email" maxlength="120" required>
               <small class="field-error"></small>
             </label>
-            <label class="field">
-              <span>WhatsApp com DDD</span>
-              <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(11) 99999-9999" required>
+            <div class="field">
+              <span>WhatsApp</span>
+              <span class="phone-control">
+                <select name="countryCode" data-country-code aria-label="País e código telefônico">
+                  <option value="+55" selected>🇧🇷 +55</option>
+                </select>
+                <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="(11) 99999-9999" aria-label="WhatsApp" required>
+              </span>
               <small class="field-error"></small>
-            </label>
+            </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Quero entrar na lista da Black em Dobro</button>
             <p class="form-foot">Ao enviar, você concorda com a <a href="/privacidade.html">política de privacidade</a>.</p>
           </form>

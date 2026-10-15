@@ -59,7 +59,7 @@ function readPayload(body) {
   if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(cleanEmail)) {
     return { error: "E-mail inválido." };
   }
-  if (!/^[1-9]{2}\d{8,9}$/.test(digits)) {
+  if (!/^[1-9]\d{7,14}$/.test(digits)) {
     return { error: "WhatsApp inválido." };
   }
 

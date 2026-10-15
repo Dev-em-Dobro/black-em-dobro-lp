@@ -9,9 +9,29 @@ if (topbar) {
 
 /* Validação --------------------------------------------------------------
    Mesmas regras do /api/subscribe: nome com letras, e-mail simples,
-   WhatsApp brasileiro com DDD (10 ou 11 dígitos). */
+   WhatsApp brasileiro ou número internacional em formato E.164. */
 const digits = (value) => String(value || "").replace(/\D/g, "");
 const cleanName = (value) => value.trim().replace(/\s+/g, " ");
+const countries = [
+  ["🇧🇷", "Brasil", "+55"], ["🇦🇷", "Argentina", "+54"], ["🇦🇺", "Austrália", "+61"],
+  ["🇧🇪", "Bélgica", "+32"], ["🇧🇴", "Bolívia", "+591"], ["🇨🇦", "Canadá", "+1"],
+  ["🇨🇱", "Chile", "+56"], ["🇨🇳", "China", "+86"], ["🇨🇴", "Colômbia", "+57"],
+  ["🇰🇷", "Coreia do Sul", "+82"], ["🇩🇰", "Dinamarca", "+45"], ["🇪🇸", "Espanha", "+34"],
+  ["🇺🇸", "Estados Unidos", "+1"], ["🇫🇷", "França", "+33"], ["🇩🇪", "Alemanha", "+49"],
+  ["🇬🇷", "Grécia", "+30"], ["🇳🇱", "Holanda", "+31"], ["🇮🇳", "Índia", "+91"],
+  ["🇮🇪", "Irlanda", "+353"], ["🇮🇱", "Israel", "+972"], ["🇮🇹", "Itália", "+39"],
+  ["🇯🇵", "Japão", "+81"], ["🇲🇽", "México", "+52"], ["🇳🇿", "Nova Zelândia", "+64"],
+  ["🇵🇪", "Peru", "+51"], ["🇵🇱", "Polônia", "+48"], ["🇵🇹", "Portugal", "+351"],
+  ["🇬🇧", "Reino Unido", "+44"], ["🇷🇺", "Rússia", "+7"], ["🇿🇦", "África do Sul", "+27"],
+  ["🇨🇭", "Suíça", "+41"], ["🇺🇾", "Uruguai", "+598"], ["🇻🇪", "Venezuela", "+58"],
+];
+
+document.querySelectorAll("[data-country-code]").forEach((select) => {
+  countries.forEach(([flag, country, code], index) => {
+    if (index === 0) return;
+    select.add(new Option(`${flag} ${country} ${code}`, code));
+  });
+});
 
 const rules = {
   nome: {
@@ -26,7 +46,13 @@ const rules = {
     message: "Informe um e-mail válido.",
   },
   whatsapp: {
-    test: (v) => /^[1-9]{2}\d{8,9}$/.test(digits(v)),
+    test: (v, input) => {
+      const local = digits(v);
+      const code = input.closest(".field").querySelector("[name=countryCode]").value;
+      return code === "+55"
+        ? /^[1-9]{2}\d{8,9}$/.test(local)
+        : /^[1-9]\d{5,13}$/.test(local) && /^[1-9]\d{7,14}$/.test(digits(code) + local);
+    },
     message: "Informe o WhatsApp com DDD.",
   },
 };
@@ -41,7 +67,7 @@ function maskPhone(value) {
 function checkField(input) {
   const rule = rules[input.name];
   if (!rule) return true;
-  const ok = rule.test(input.value);
+  const ok = rule.test(input.value, input);
   const error = input.closest(".field")?.querySelector(".field-error");
   input.setAttribute("aria-invalid", ok ? "false" : "true");
   if (error) error.textContent = ok ? "" : rule.message;
@@ -55,9 +81,23 @@ document.querySelectorAll("[data-waitlist]").forEach((form) => {
   const done = form.parentElement.querySelector(".form-done");
   const inputs = [...form.querySelectorAll("input[name]")].filter((i) => rules[i.name]);
   const phone = form.querySelector('[name="whatsapp"]');
+  const countryCode = form.querySelector('[name="countryCode"]');
+  phone.maxLength = 15;
 
   phone.addEventListener("input", () => {
-    phone.value = maskPhone(phone.value);
+    const maxLength = 15 - digits(countryCode.value).length;
+    phone.maxLength = countryCode.value === "+55" ? 15 : maxLength;
+    phone.value = countryCode.value === "+55"
+      ? maskPhone(phone.value)
+      : digits(phone.value).slice(0, maxLength);
+  });
+  countryCode.addEventListener("change", () => {
+    phone.maxLength = countryCode.value === "+55" ? 15 : 15 - digits(countryCode.value).length;
+    phone.placeholder = countryCode.value === "+55" ? "(11) 99999-9999" : "Número local";
+    phone.value = countryCode.value === "+55"
+      ? maskPhone(phone.value)
+      : digits(phone.value).slice(0, phone.maxLength);
+    if (phone.getAttribute("aria-invalid") === "true") checkField(phone);
   });
 
   // Revalida em tempo real só depois do primeiro erro no campo.
@@ -93,7 +133,7 @@ document.querySelectorAll("[data-waitlist]").forEach((form) => {
         body: JSON.stringify({
           name: cleanName(form.nome.value),
           email: form.email.value.trim().toLowerCase(),
-          phone: digits(form.whatsapp.value),
+          phone: digits(countryCode.value) + digits(form.whatsapp.value),
         }),
       });
       const result = await response.json().catch(() => ({}));
