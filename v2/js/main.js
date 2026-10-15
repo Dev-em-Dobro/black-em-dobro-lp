@@ -1,5 +1,12 @@
 document.documentElement.classList.add("js");
 
+const topbar = document.querySelector(".topbar");
+const updateTopbar = () => topbar?.classList.toggle("is-hidden", window.scrollY > 24);
+if (topbar) {
+  window.addEventListener("scroll", updateTopbar, { passive: true });
+  updateTopbar();
+}
+
 /* Validação --------------------------------------------------------------
    Mesmas regras do /api/subscribe: nome com letras, e-mail simples,
    WhatsApp brasileiro com DDD (10 ou 11 dígitos). */
