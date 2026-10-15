@@ -174,14 +174,14 @@ button, input { font: inherit; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand-mark {
   display: grid; place-items: center; width: 32px; height: 32px;
-  border-radius: var(--r-md); background: var(--ds-roxo);
-  font-family: var(--font-titulo); font-size: 20px; font-weight: 700; line-height: 1; color: #fff;
+  border-radius: var(--r-md); background: var(--ds-roxo); color: #fff;
 }
+.brand-mark svg { display: block; width: 22px; height: 22px; }
 .brand-name { font-family: var(--font-titulo); font-size: 19px; font-weight: 700; color: #fff; white-space: nowrap; }
 .brand-name span { font-weight: 400; color: var(--text-faint); }
 
 /* Hero ---------------------------------------------------------------- */
-.hero { position: relative; padding: 96px 0 72px; overflow: hidden; text-align: center; }
+.hero { position: relative; padding: 0 0 72px; overflow: hidden; text-align: left; }
 .hero::before {
   content: ""; position: absolute; left: 50%; top: -360px; transform: translateX(-50%);
   width: 1100px; height: 720px;
@@ -198,11 +198,18 @@ button, input { font: inherit; }
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
   pointer-events: none;
 }
-.hero-inner { position: relative; display: grid; justify-items: center; }
-.hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 28px; }
-.hero-title { max-width: 15em; font-size: clamp(38px, 6.2vw, 72px); line-height: 1.04; letter-spacing: -0.02em; }
-.hero-lead { max-width: 40rem; margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.65; color: var(--text-muted); }
-.hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.hero-banner { position: relative; width: 100vw; margin: 0 calc(50% - 50vw) 48px; }
+.hero-banner img { display: block; width: 100%; height: auto; }
+.hero-split {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 420px);
+  gap: 48px; align-items: center;
+}
+.hero-copy { display: grid; justify-items: start; }
+.hero-badges { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; margin-bottom: 16px; }
+.hero-title { max-width: 12em; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.02em; }
+.hero-lead { max-width: 36rem; margin-top: 16px; font-size: clamp(16px, 1.4vw, 18px); line-height: 1.6; color: var(--text-muted); }
+.hero-form-note { margin-bottom: 18px; color: var(--text-muted); font-size: 15px; line-height: 1.5; }
 
 /* Ticker -------------------------------------------------------------- */
 .ticker {
@@ -435,10 +442,10 @@ button, input { font: inherit; }
   :root { --gutter: 16px; --topbar: 60px; }
   .brand-name { font-size: 16px; }
   .section { padding: 72px 0; }
-  .hero { padding: 64px 0 56px; }
-  .hero-ctas { width: 100%; }
-  .hero-ctas .btn { width: 100%; }
-  .split, .signup, .founders, .duo, .narrative { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .hero { padding: 0 0 48px; }
+  .hero-banner { margin-bottom: 32px; }
+  .hero-title { font-size: clamp(28px, 7vw, 36px); }
+  .split, .signup, .hero-split, .founders, .duo, .narrative { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .narrative { gap: 24px; }
   .versus, .paths { grid-template-columns: minmax(0, 1fr); }
   .versus-gap, .paths-or { justify-self: center; }

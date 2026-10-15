@@ -6,7 +6,7 @@
   <title>Black em Dobro Infinita — Dev em Dobro</title>
   <meta name="description" content="Invista uma única vez e tenha acesso vitalício ao ecossistema da Dev em Dobro: Builders Club, DevQuest e todas as formações incluídas nesta oferta.">
   <meta name="theme-color" content="#000000">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236528d3'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='18' font-weight='700' fill='%23fff' text-anchor='middle'%3E%E2%88%9E%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236528d3'/%3E%3Cpath d='M16 16c-1.7-2.3-3.4-3.4-5-3.4a3.4 3.4 0 1 0 0 6.8c1.6 0 3.3-1.1 5-3.4Zm0 0c1.7 2.3 3.4 3.4 5 3.4a3.4 3.4 0 0 0 0-6.8c-1.6 0-3.3 1.1-5 3.4Z' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;600;700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap">
@@ -18,10 +18,10 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <a class="brand" href="#topo" aria-label="Black em Dobro Infinita — início">
-        <span class="brand-mark" aria-hidden="true">∞</span>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="brand-name">Black em Dobro <span>Infinita</span></span>
       </a>
-      <a class="btn btn-primary btn-sm" href="#lista">Entrar na lista</a>
+      <a class="btn btn-primary btn-sm" href="#inscricao">Entrar na lista</a>
     </div>
   </header>
 
@@ -29,15 +29,46 @@
     <!-- HERO ------------------------------------------------------------>
     <section class="hero" id="topo">
       <div class="hero-grid-bg" aria-hidden="true"></div>
-      <div class="container hero-inner">
-        <div class="hero-badges">
-          <span class="badge badge-laranja badge-live">Black Friday 2026</span>
-          <span class="badge badge-roxo-soft">Acesso vitalício</span>
+      <figure class="hero-banner">
+        <img src="/assets/banner-bf-final.png" alt="Roberto e Ricardo Dias à frente das formações da Black em Dobro Infinita" width="1942" height="809">
+      </figure>
+      <div class="container hero-split">
+        <div class="hero-copy">
+          <div class="hero-badges">
+            <span class="badge badge-laranja badge-live">Black Friday 2026</span>
+            <span class="badge badge-roxo-soft">Acesso vitalício</span>
+          </div>
+          <h1 class="hero-title">Nunca mais gaste <span class="hl">nenhum real</span> com cursos de IA e programação.</h1>
+          <p class="hero-lead">Invista <strong>uma única vez</strong> e tenha acesso vitalício ao ecossistema da Dev em Dobro: <strong>Builders Club, DevQuest e todas as formações incluídas nesta oferta</strong>.</p>
         </div>
-        <h1 class="hero-title">Nunca mais gaste <span class="hl">nenhum real</span> com cursos de IA e programação.</h1>
-        <p class="hero-lead">Invista <strong>uma única vez</strong> e tenha acesso vitalício ao ecossistema da Dev em Dobro: <strong>Builders Club, DevQuest e todas as formações incluídas nesta oferta</strong>.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary btn-lg" href="#lista">Quero entrar na lista da Black em Dobro <span class="arrow" aria-hidden="true">→</span></a>
+        <div class="card signup-card hero-form" id="inscricao">
+          <p class="hero-form-note">Preencha seus dados para receber as informações oficiais da abertura.</p>
+          <form class="form" data-waitlist novalidate>
+            <div class="form-status" role="status" aria-live="polite"></div>
+            <label class="hp" aria-hidden="true">Site<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+            <label class="field">
+              <span>Nome</span>
+              <input name="nome" type="text" autocomplete="name" maxlength="80" required>
+              <small class="field-error"></small>
+            </label>
+            <label class="field">
+              <span>Melhor e-mail</span>
+              <input name="email" type="email" autocomplete="email" maxlength="120" required>
+              <small class="field-error"></small>
+            </label>
+            <label class="field">
+              <span>WhatsApp com DDD</span>
+              <input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(11) 99999-9999" required>
+              <small class="field-error"></small>
+            </label>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Quero entrar na lista</button>
+            <p class="form-foot">Ao enviar, você concorda com a <a href="/privacidade.html">política de privacidade</a>.</p>
+          </form>
+          <div class="form-done" hidden>
+            <span class="done-icon" aria-hidden="true"></span>
+            <h3>Você está na lista.</h3>
+            <p>Vamos enviar a data, o horário e a condição especial da abertura.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -334,7 +365,7 @@
     <div class="container">
       <div class="footer-top">
         <a class="brand" href="#topo">
-          <span class="brand-mark" aria-hidden="true">∞</span>
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <span class="brand-name">Black em Dobro <span>Infinita</span></span>
         </a>
         <nav aria-label="Institucional">
@@ -349,7 +380,7 @@
   </footer>
 
   <div class="dock" data-dock>
-    <a class="btn btn-primary btn-block" href="#lista">Entrar na lista da Black</a>
+    <a class="btn btn-primary btn-block" href="#inscricao">Entrar na lista da Black</a>
   </div>
 
   <script src="/v2/js/main.js" defer></script>
