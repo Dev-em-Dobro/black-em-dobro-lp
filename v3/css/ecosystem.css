@@ -45,7 +45,8 @@
   .ecosystem-art { max-width: 340px; margin-bottom: 20px; }
 }
 @media (max-width: 860px) {
-  .ecosystem-heading { margin-bottom: 36px; }
+  .ecosystem-heading { margin-bottom: 36px; text-align: center; }
+  .ecosystem-heading .title { margin-inline: auto; }
   .ecosystem-layout { grid-template-columns: minmax(0,1fr); gap: 44px; }
   .ecosystem-visual { position: static; }
   .ecosystem-art { max-width: 340px; margin-bottom: 24px; }

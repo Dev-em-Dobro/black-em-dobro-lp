@@ -150,6 +150,9 @@
 }
 @media (max-width: 700px) {
   .v3 .topbar[data-persistent] .countdown { display: none; }
+  .v3-footer { text-align: center; }
+  .v3-footer .footer-top { flex-direction: column; justify-content: center; }
+  .v3-footer nav { justify-content: center; }
   .v3-contrast { grid-template-columns: minmax(0,1fr); gap: 16px; padding: 22px 16px; border-radius: 12px; }
   .v3-contrast-panel { padding: 24px; }
   .v3-contrast-tool { min-height: 230px; }
@@ -203,6 +206,7 @@
   .v3 .countdown { display: grid; flex: 0 0 auto; gap: 0; justify-items: center; padding: 4px 8px; line-height: 1.2; }
   .v3 .countdown strong { font-size: 10px; }
   .v3 .hero-banner { height: clamp(210px,60vw,240px); }
+  .v3 .hero-banner img, .v3 .hero-cover-motion { translate: 0 -80px; }
   .v3 .hero-title { font-size: clamp(28px, 7vw, 36px); }
   .v3 .hero-lead { margin-top: 10px; font-size: 17px; }
   .v3 .hero-event { margin-top: 14px; }

@@ -109,6 +109,7 @@
 }
 @media (max-width: 560px) {
   .builders-universe-grid { gap: 36px; }
+  .builders-gallery-controls button { width: 44px; height: 44px; padding: 13px; }
   .builders-universe-meta { font-size: 8px; }
   .builders-universe-copy h2 { font-size: 36px; }
   .builders-universe-description { font-size: 16px; }
