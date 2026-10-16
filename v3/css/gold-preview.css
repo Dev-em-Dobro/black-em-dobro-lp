@@ -1,0 +1,133 @@
+.gold-page { background: #090b0a; }
+.gold-preview-head { padding: 64px 0 40px; }
+.gold-preview-head .eyebrow { color: #d8bc7d; }
+.gold-preview-head h1 { max-width: 800px; margin: 20px 0; font-size: clamp(32px,4vw,52px); letter-spacing: -.04em; }
+.gold-preview-head p { max-width: 700px; color: #aab5af; line-height: 1.6; }
+.gold-preview-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.gold-preview-nav a { padding: 10px 14px; border: 1px solid #39403a; border-radius: 6px; color: #e8ece7; font-size: 13px; text-decoration: none; }
+.gold-preview-nav a:hover { border-color: #c5a867; color: #e7c787; }
+.gold-concept { margin-bottom: 64px; scroll-margin-top: 24px; }
+.gold-concept-label { display: flex; align-items: baseline; gap: 16px; padding-block: 24px; border-top: 1px solid #29302b; }
+.gold-concept-label span { color: #c6ae7d; font: 400 11px var(--font-mono); }
+.gold-concept-label h2 { font-size: 20px; font-weight: 500; }
+.gold-concept-label p { margin-left: auto; color: #8c9991; font-size: 13px; }
+.gold-demo { position: relative; isolation: isolate; overflow: hidden; padding: 80px 0 56px; background: #060807; border-block: 1px solid #302a1d; }
+.gold-demo>.container { position: relative; z-index: 2; }
+.gold-demo .title { font-size: clamp(34px,3.8vw,46px); letter-spacing: -.035em; }
+.gold-demo .hl, .gold-demo .eyebrow { color: #e9c77e; }
+.gold-demo .eyebrow::after { color: #e9c77e; }
+.gold-demo .body-lg { font-size: 17px; line-height: 1.65; color: #d1d3c9; }
+.gold-demo .body { color: #aab2a8; }
+.gold-demo .season li { color: #e7d6b0; border-color: #9b7b403d; background: #26241cb3; }
+.gold-page .gold-demo .season li:first-child { background: #4a381e; border-color: #a88548; }
+.gold-demo .timeline { margin-top: 64px; padding: 28px 0 0; }
+.gold-page .gold-demo .timeline::before { top: 52px; background: linear-gradient(90deg,#b6924b,#b6924b30); }
+.gold-page .gold-demo .timeline-dot { color: #f0dca9; border-color: #9b7c44; background: #14160f; }
+.gold-demo .timeline h3 { font-size: 22px; }
+.gold-demo .timeline p { color: #bcc3b7; line-height: 1.6; }
+.gold-page .gold-demo .callout { margin-top: 40px; background: #c9a75e0c; border-color: #ac8b47; color: #bfc5b9; font-size: 14px; line-height: 1.65; }
+.gold-art { position: absolute; pointer-events: none; }
+.gold-starfield { position: absolute; inset: 0; background-image: radial-gradient(circle at 18% 27%,#e9d3a18c 0 1px,transparent 1.5px),radial-gradient(circle at 71% 63%,#e9d3a14d 0 1px,transparent 1.5px),radial-gradient(circle at 48% 83%,#e9d3a13d 0 .7px,transparent 1px); background-size: 191px 173px,269px 211px,127px 149px; opacity: .45; mask-image: linear-gradient(90deg,transparent,#000); }
+
+/* 01: a luminous disc wraps a dark golden sphere. */
+.gold-demo--halo { background: radial-gradient(ellipse at 80% 34%,#382914 0,transparent 53%),#040605; }
+.gold-demo--halo .split { display: grid; grid-template-columns: 1fr; width: 50%; gap: 32px; }
+.gold-demo--halo .gold-art { top: 50px; right: -60px; width: 640px; height: 510px; }
+.solar-halo { position: absolute; inset: 45px 80px; border: 2px solid #f8d794; border-radius: 50%; box-shadow: 0 0 14px #ffd380,0 0 42px #d8964166,inset 0 0 24px #dda34a99; }
+.solar-halo::before, .solar-halo::after { position: absolute; inset: -12px; border: 1px solid #bb823f70; border-radius: 50%; content: ''; }
+.solar-halo::after { inset: -29px; border-color: #bb823f25; }
+.solar-sphere { position: absolute; inset: 66px 103px; border-radius: 50%; background: radial-gradient(circle at 28% 20%,#574228,#1e1a11 28%,#050807 63%); box-shadow: inset 5px 5px 12px #fff0bd33,inset -35px -20px 55px #000; }
+.solar-disc { position: absolute; top: 45%; left: -10%; width: 120%; height: 25%; border-radius: 50%; transform: rotate(-18deg); background: radial-gradient(ellipse,transparent 29%,#fff3c470 34%,#eac16a 37%,#a46b2a66 43%,transparent 64%); filter: drop-shadow(0 0 12px #e7b45680); animation: disc-breathe 7s ease-in-out infinite; }
+.gold-demo--halo .timeline { border-top: 1px solid #d2a95c20; background: linear-gradient(#040605b3,transparent); }
+@keyframes disc-breathe { 50% { opacity: .65; transform: rotate(-15deg) scale(1.04); } }
+
+/* 02: an illuminated atlas, with the globe separate from the copy. */
+.gold-demo--atlas { background: radial-gradient(ellipse at 24% 32%,#183b30 0,transparent 58%),#07100c; }
+.gold-demo--atlas .split { display: grid; grid-template-columns: 1fr; width: 51%; margin-left: auto; gap: 28px; }
+.gold-demo--atlas .gold-art { top: 55px; left: max(12px,calc(50% - 620px)); width: min(47%,540px); aspect-ratio: 1; }
+.atlas-globe { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 28px #d5a95622); }
+.atlas-meridians { transform-origin: 200px 200px; animation: atlas-turn 24s linear infinite; }
+.atlas-orbit { transform-origin: 200px 200px; animation: gold-turn 38s linear infinite; }
+@keyframes atlas-turn { to { transform: rotateY(360deg); } }
+@keyframes gold-turn { to { transform: rotate(360deg); } }
+
+/* 03: a large rising world creates a low golden horizon. */
+.gold-demo--horizon { padding-top: 72px; background: #030605; }
+.gold-demo--horizon .split { display: block; text-align: center; }
+.gold-demo--horizon .split>div:first-child { max-width: 740px; margin-inline: auto; }
+.gold-demo--horizon .title { max-width: none; }
+.gold-demo--horizon .season { justify-content: center; }
+.gold-demo--horizon .stack { display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; max-width: 950px; margin: 36px auto 0; text-align: left; }
+.gold-demo--horizon .gold-art { width: 1250px; height: 1250px; top: 350px; left: 50%; transform: translateX(-50%); border: 1px solid #f9d993; border-radius: 50%; background: radial-gradient(circle at 50% 0,#51401f,#17251b 32%,#050c08 57%); box-shadow: 0 -2px 6px #ffefbf,0 -12px 35px #c6953866,0 -35px 95px #c695382e,inset 0 12px 35px #dbaf5650; }
+.horizon-latitude { position: absolute; top: 42px; left: 10%; width: 80%; height: 20%; border: 1px solid #d8b66e24; border-radius: 50%; }
+.horizon-latitude:nth-child(2) { top: 100px; left: 4%; width: 92%; height: 27%; }
+.horizon-latitude:nth-child(3) { top: 180px; left: 1%; width: 98%; height: 34%; }
+.gold-demo--horizon .timeline { margin-top: 85px; padding: 32px 28px; border-radius: 12px; background: #04110cb8; backdrop-filter: blur(6px); }
+.gold-demo--horizon .callout { background: #030b08b8; }
+
+/* 04: warm paper and a dark, metallic eclipse. */
+.gold-demo--ivory { background: #e8e5db; border-color: #b7ac91; }
+.gold-demo--ivory .split { display: grid; grid-template-columns: 1fr; width: 49%; gap: 28px; }
+.gold-demo--ivory .title, .gold-demo--ivory .timeline h3 { color: #18211c; }
+.gold-demo--ivory .hl, .gold-demo--ivory .eyebrow { color: #80612c; }
+.gold-demo--ivory .body-lg, .gold-demo--ivory .body, .gold-demo--ivory .timeline p { color: #4e594e; }
+.gold-demo--ivory .gold-art { top: 55px; right: -55px; width: 590px; height: 590px; border-radius: 50%; background: radial-gradient(circle at 35% 28%,#394336 0,#1a241c 34%,#080e0b 60%,#090c09 65%,#f6e3b0 66%,#ad8548 66.5%,#e0cc9d 67%,transparent 68%); box-shadow: -18px 30px 65px #61502c35; transform: rotate(-25deg); }
+.ivory-orbit { position: absolute; inset: -40px; border: 1px solid #aa905c50; border-radius: 50%; transform: rotateX(65deg) rotate(-20deg); }
+.ivory-orbit::after { position: absolute; top: 10%; left: 20%; width: 12px; height: 12px; border-radius: 50%; background: #d1ac64; box-shadow: 0 0 20px #d1ac64; content: ''; }
+.gold-demo--ivory .season li, .gold-page .gold-demo--ivory .season li:first-child { color: #65502b; background: #d4c7a5; border-color: #b5a176; }
+.gold-page .gold-demo--ivory .timeline-dot { color: #594725; background: #e8e5db; }
+.gold-page .gold-demo--ivory .callout { color: #4e594e; background: #d6cbb550; }
+
+/* 05: the three stages sit against an animated orbital map. */
+.gold-demo--orbits { background: radial-gradient(ellipse at 77% 45%,#2d3219 0,transparent 55%),#07100b; }
+.gold-demo--orbits .split { display: grid; grid-template-columns: 1fr; width: 48%; gap: 28px; }
+.gold-demo--orbits .gold-art { top: 95px; right: -50px; width: 650px; height: 650px; opacity: .6; }
+.orbital-map { width: 100%; height: 100%; overflow: visible; }
+.orbit-satellite { transform-origin: 200px 200px; animation: gold-turn 24s linear infinite; }
+.orbit-satellite--two { animation-duration: 36s; animation-direction: reverse; }
+.orbit-satellite--three { animation-duration: 50s; }
+.gold-demo--orbits .timeline { position: absolute; top: 0; right: 3%; display: grid; grid-template-columns: 1fr; gap: 38px; width: 34%; margin: 0; padding: 0; }
+.gold-page .gold-demo--orbits .timeline::before { left: 24px; right: auto; top: 24px; bottom: 24px; width: 1px; height: auto; background: linear-gradient(#b6924b,#b6924b30); }
+.gold-demo--orbits .timeline li { grid-template-columns: 48px 1fr; column-gap: 18px; gap: 8px 18px; }
+.gold-demo--orbits .timeline-dot { grid-row: span 2; }
+.gold-demo--orbits .timeline p { grid-column: 2; }
+.gold-demo--orbits .timeline h3, .gold-demo--orbits .timeline p { text-shadow: 0 2px 12px #000; }
+.gold-demo--orbits .callout { margin-top: 52px; }
+.gold-demo--orbits .hl, .gold-demo--orbits .eyebrow { color: #2dd4bf; }
+.gold-page .gold-demo--orbits .timeline-dot { color: #8edac4; }
+.gold-preview-foot { padding: 0 24px 64px; color: #8c9991; text-align: center; font-size: 13px; }
+
+@media (max-width: 1000px) {
+  .gold-demo--halo .gold-art { right: -180px; opacity: .75; }
+  .gold-demo--ivory .gold-art { right: -210px; }
+  .gold-demo--orbits .gold-art { right: -190px; }
+}
+@media (max-width: 760px) {
+  .gold-preview-head { padding-top: 36px; }
+  .gold-concept-label { flex-wrap: wrap; gap: 8px 14px; }
+  .gold-concept-label p { width: 100%; margin: 0; }
+  .gold-demo { padding: 40px 0; }
+  .gold-demo .title { font-size: 34px; }
+  .gold-demo .body-lg { font-size: 16px; }
+  .gold-demo .split, .gold-demo--orbits .split { width: 100%; gap: 24px; margin: 0; }
+  .gold-demo .gold-art { position: relative; top: auto; right: auto; left: auto; margin: 0 auto 28px; }
+  .gold-demo--halo .gold-art { width: 430px; max-width: 110%; height: 310px; margin-left: -5%; opacity: 1; }
+  .gold-demo--halo .solar-halo { inset: 25px 80px; }
+  .gold-demo--halo .solar-sphere { inset: 42px 96px; }
+  .gold-demo--halo .solar-disc { left: 0; width: 100%; }
+  .gold-demo--atlas .gold-art { width: 300px; max-width: 90%; }
+  .gold-demo--horizon .gold-art { position: absolute; width: 1000px; height: 1000px; top: auto; bottom: -520px; left: 50%; margin: 0; }
+  .gold-demo--horizon .stack { grid-template-columns: 1fr; gap: 20px; margin-top: 28px; }
+  .gold-demo--ivory .gold-art { width: 280px; height: 280px; }
+  .gold-demo--orbits .gold-art { position: absolute; top: auto; bottom: 120px; right: -160px; width: 520px; height: 520px; }
+  .gold-demo .timeline, .gold-demo--horizon .timeline { margin-top: 40px; padding: 0; grid-template-columns: 1fr; gap: 24px; background: transparent; backdrop-filter: none; }
+  .gold-demo .timeline li { display: grid; grid-template-columns: 44px 1fr; gap: 6px 16px; }
+  .gold-demo .timeline-dot { width: 44px; height: 44px; grid-row: span 2; }
+  .gold-demo .timeline p { grid-column: 2; }
+  .gold-page .gold-demo .timeline::before { left: 22px; right: auto; top: 22px; bottom: 22px; width: 1px; height: auto; background: linear-gradient(#b6924b,#b6924b30); }
+  .gold-demo--orbits .timeline { position: relative; width: 100%; right: auto; top: auto; }
+  .gold-demo .callout { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gold-art *, .gold-art { animation: none !important; }
+}

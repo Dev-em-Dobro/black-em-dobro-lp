@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c100f">
+  <title>5 direções de cards — Black em Dobro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;600&family=Ubuntu:wght@400;500;700&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    :root { color-scheme: dark; font-family: Ubuntu, sans-serif; color: #f0f4f2; background: #0c100f; font-synthesis: none; }
+    body { margin: 0; }
+    a { color: inherit; text-underline-offset: 4px; }
+    svg { display: block; }
+    p, h1, h2, h3 { margin: 0; }
+    .shell { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+    .masthead { padding: 34px 0 48px; }
+    .masthead-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #97a49e; font: 500 11px/1.6 'Martian Mono', monospace; }
+    .masthead h1 { max-width: 850px; margin: 38px 0 18px; font-size: clamp(30px, 4.2vw, 52px); line-height: 1.08; letter-spacing: -.045em; }
+    .masthead p { max-width: 760px; color: #a8b6ae; font-size: 17px; line-height: 1.6; }
+    .masthead p strong { color: #77d8bc; font-weight: 500; }
+    .jump-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .jump-nav a { display: inline-flex; gap: 14px; align-items: center; padding: 11px 16px; border: 1px solid #34413a; border-radius: 6px; color: #d7e0da; font-size: 13px; text-decoration: none; transition: background .2s; }
+    .jump-nav a span { color: #7f9689; font: 500 10px 'Martian Mono', monospace; }
+    .jump-nav a:hover, .jump-nav a:focus-visible { background: #21342b; }
+    .concept { padding: 26px 0 42px; border-top: 1px solid #2c3730; scroll-margin-top: 20px; }
+    .concept-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .concept-number { color: #7f9689; font: 500 11px 'Martian Mono', monospace; }
+    .concept-meta h2 { font-size: 20px; font-weight: 500; letter-spacing: -.025em; }
+    .concept-meta p { margin-left: auto; color: #99a69e; font-size: 13px; text-align: right; }
+    .concept-meta a { color: #c6d7cc; }
+    .demo { padding: 40px; border-radius: 20px; overflow: hidden; }
+    .demo-label { margin-bottom: 26px; font-size: 16px; font-weight: 500; letter-spacing: -.015em; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 18px; }
+    .copy { position: relative; font-size: clamp(18px, 1.65vw, 22px); line-height: 1.35; letter-spacing: -.025em; font-weight: 400; }
+    .copy strong { font-weight: 700; }
+    .micro { font: 500 10px/1.5 'Martian Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .card-icon { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    /* 01 — Dark glass, light beams and dimensional line drawings. */
+    .glow-demo { background: #0a0d0c; border: 1px solid #26342d; }
+    .glow-demo .demo-label { color: #a9beb2; }
+    .glow-card { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; min-height: 330px; padding: 25px; overflow: hidden; border: 1px solid #34493d; border-radius: 18px; background: linear-gradient(145deg,#17231c,#0c110e 65%); box-shadow: inset 0 1px 0 #ffffff12, 0 14px 30px #03070460; }
+    .glow-card::before { position: absolute; z-index: -1; inset: -25% -35%; background: conic-gradient(from 150deg at 54% 42%,transparent 0deg,#d7ffe900 55deg,#d7ffe926 64deg,transparent 78deg); transform: rotate(-15deg); content: ''; transition: transform .8s cubic-bezier(.16,1,.3,1), opacity .8s; }
+    .glow-card::after { position: absolute; top: 28px; right: 28px; width: 5px; height: 5px; border-radius: 50%; background: #d3f8dd; box-shadow: 0 0 12px #a9ffd9; content: ''; }
+    .glow-card:hover::before { transform: rotate(16deg); opacity: .6; }
+    .glow-card .micro { position: absolute; top: 26px; left: 25px; color: #b2cabc; }
+    .glow-card .copy { color: #a0b2a6; }
+    .glow-card .copy strong { color: #effff3; }
+    .glow-art { width: 108px; height: 100px; margin: 10px auto 30px; fill: none; stroke: #a5d4b6; stroke-width: 1.1; filter: drop-shadow(0 0 10px #87e5aa22); }
+    .glow-art .faint { stroke: #608c6d; opacity: .5; }
+    .glow-card:nth-child(2) { background: linear-gradient(150deg,#152c24,#0c1410 70%); }
+    .glow-card:nth-child(2) .glow-art { animation: float 7s ease-in-out infinite; }
+    .glow-card:nth-child(3) { background: linear-gradient(135deg,#202a20,#0e130e 65%); }
+    @keyframes float { 50% { transform: translateY(-7px); } }
+    /* 02 — Physical folders with peek-out covers and paper fronts. */
+    .folder-demo { color: #28332d; background: #e5e4da; }
+    .folder-demo .demo-label { color: #5b685e; }
+    .folder-card { position: relative; min-height: 340px; padding-top: 28px; isolation: isolate; }
+    .folder-back { position: absolute; inset: 0 5px 12px; overflow: hidden; border: 7px solid #f5f5eb; border-radius: 22px; background-color: #7baf9b; box-shadow: 0 7px 14px #3e503424; }
+    .folder-back::after { position: absolute; inset: 0; background: linear-gradient(180deg,transparent,#08120b55); content: ''; }
+    .folder-back img { width: 100%; height: 178px; object-fit: cover; object-position: 50% 22%; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+    .folder-card:nth-child(2) .folder-back img { object-position: 50% 0; }
+    .folder-card:nth-child(3) .folder-back img { object-position: 50% 36%; }
+    .folder-sheet { position: absolute; top: 40px; left: 28px; right: 24px; height: 145px; border-radius: 9px; background: #fdfdf8; transform: rotate(-5deg); box-shadow: 0 2px 5px #25302b30; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+    .folder-sheet::before, .folder-sheet::after { position: absolute; top: 19px; left: 14px; right: 20px; height: 3px; background: #cad5cd; box-shadow: 0 10px #e0e7e0,0 20px #e0e7e0; content: ''; }
+    .folder-sheet::after { top: 72px; width: 45%; right: auto; background: #4e8a70; box-shadow: none; }
+    .folder-card:hover .folder-sheet { transform: translateY(-10px) rotate(-8deg); }
+    .folder-card:hover .folder-back img { transform: scale(1.05); }
+    .folder-front { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 248px; margin-top: 64px; padding: 28px 22px 22px; border-radius: 0 18px 20px 20px; background: #f7f6eb; box-shadow: 0 5px 7px #23322214; }
+    .folder-front::before { position: absolute; bottom: calc(100% - 1px); left: 0; width: 62%; height: 29px; background: inherit; border-radius: 17px 17px 0 0; clip-path: polygon(0 0,80% 0,100% 100%,0 100%); content: ''; }
+    .folder-front .micro { color: #536c5d; }
+    .folder-front .copy { color: #57675c; font-size: 19px; }
+    .folder-front .copy strong { color: #243d2e; }
+    .folder-card:nth-child(2) .folder-front { background: #bcd4bd; }
+    .folder-card:nth-child(3) .folder-front { background: #d6d7c1; }
+    /* 03 — Solid colors, floating objects and CSS perspective. */
+    .depth-demo { color: #30453b; background: #e6ece7; }
+    .depth-demo .demo-label { color: #52695c; }
+    .depth-stage { perspective: 1300px; }
+    .depth-card { position: relative; display: flex; flex-direction: column; height: 100%; min-height: 335px; padding: 26px; border: 1px solid #ffffff55; border-radius: 16px; background: #bddcc6; color: #173a29; box-shadow: 0 16px 20px -12px #254e3c44, inset 0 1px #ffffff55; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s; }
+    .depth-stage:nth-child(2) .depth-card { background: #e1bcb0; color: #58362c; transform: rotateY(-5deg) rotateX(3deg); }
+    .depth-stage:nth-child(3) .depth-card { background: #e2d99f; color: #4e4826; }
+    .depth-stage:hover .depth-card { transform: rotateY(-9deg) rotateX(7deg) translateY(-7px); box-shadow: 12px 24px 26px -12px #254e3c44; }
+    .depth-card .copy { position: static; margin-top: auto; font-size: 20px; transform: translateZ(28px); }
+    .depth-card .micro { opacity: .75; }
+    .depth-art { display: block; position: relative; flex: 0 0 130px; height: 130px; margin: 18px 0 20px; transform: translateZ(42px); }
+    .depth-code { position: absolute; inset: 0; display: grid; place-items: center; font: 600 82px/.9 'Martian Mono',monospace; letter-spacing: -.2em; text-indent: -.2em; color: #3a7855; text-shadow: 1px 1px #1c563b,3px 3px #1c563b,5px 5px #1c563b,7px 7px #1c563b,12px 18px 17px #214d3a45; transform: rotate(-9deg); }
+    .depth-cube { position: absolute; top: 27px; left: calc(50% - 40px); width: 80px; height: 80px; transform: rotate(-22deg) skew(8deg); border-radius: 14px; background: #b76a50; box-shadow: 1px 2px #80432f,3px 4px #80432f,5px 6px #80432f,7px 8px #80432f,11px 17px 20px #79453345,inset 0 1px #ffd7b955; }
+    .depth-cube::before { position: absolute; inset: 19px; border: 2px solid #fbd3bf; border-radius: 5px; content: ''; }
+    .depth-ticket { position: absolute; top: 18px; left: calc(50% - 50px); width: 100px; height: 105px; padding: 12px; border-radius: 12px; background: #fcf4c8; color: #514821; box-shadow: 1px 2px #9d8f4e,3px 4px #9d8f4e,5px 6px #9d8f4e,10px 18px 20px #675e2e44; transform: rotate(9deg); }
+    .depth-ticket small { display: block; padding-bottom: 8px; border-bottom: 1px dashed #b8ad73; font: 600 9px 'Martian Mono',monospace; text-align: center; }
+    .depth-ticket b { display: block; margin-top: 7px; font: 500 35px 'Martian Mono',monospace; text-align: center; }
+    /* 04 — Real full-bleed images, asymmetric magazine composition. */
+    .photo-demo { background: #131615; }
+    .photo-demo .demo-label { color: #c3cec8; }
+    .photo-cards { display: grid; grid-template-columns: 1.05fr 1fr; gap: 14px; }
+    .photo-card { position: relative; isolation: isolate; min-height: 204px; overflow: hidden; border: 1px solid #ffffff14; border-radius: 12px; background: #111c17; }
+    .photo-card:first-child { grid-row: span 2; min-height: 422px; }
+    .photo-card img { position: absolute; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+    .photo-card::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg,#07120c12 20%,#07120c99 50%,#07120cf5 100%); content: ''; }
+    .photo-card .micro { position: absolute; top: 22px; left: 24px; padding: 7px 10px; border: 1px solid #ffffff35; border-radius: 4px; background: #07120c77; color: #e1e9e3; }
+    .photo-card .copy { position: absolute; bottom: 26px; left: 26px; right: 26px; max-width: 390px; color: #d0dcd4; font-size: 22px; }
+    .photo-card .copy strong { color: #fff; }
+    .photo-card:first-child img { object-position: 50% 36%; }
+    .photo-card:nth-child(2) img { object-position: 50% 1%; }
+    .photo-card:nth-child(2)::after { background: linear-gradient(90deg,#08110def,#08110dbb 65%,#08110d20); }
+    .photo-card:nth-child(2) .copy { max-width: 320px; }
+    .photo-card:nth-child(3) img { object-position: 50% 50%; }
+    .photo-card:nth-child(3)::after { background: linear-gradient(90deg,#132c23f5,#132c23d9 60%,#132c2380); }
+    .photo-card:hover img { transform: scale(1.045); }
+    /* 05 — Flat editorial mosaic, no images or gradients. */
+    .print-demo { color: #f0f1e8; background: #18231c; }
+    .print-demo .demo-label { color: #c9d1c6; }
+    .print-cards { display: grid; grid-template-columns: 1.05fr 1fr; gap: 10px; }
+    .print-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 25px; min-height: 180px; padding: 26px; background: #f0eee0; color: #24382b; }
+    .print-card:first-child { grid-row: span 2; min-height: 370px; background: #b4ca91; }
+    .print-card:nth-child(3) { background: #28382d; color: #edf1df; border: 1px solid #536347; }
+    .print-card .micro { display: flex; justify-content: space-between; }
+    .print-card .copy { max-width: 370px; }
+    .print-card:first-child .copy { font-size: clamp(25px, 2.6vw, 34px); line-height: 1.18; letter-spacing: -.04em; }
+    .print-mark { display: block; font: 400 100px/.7 'Martian Mono',monospace; letter-spacing: -.13em; margin-left: -5px; }
+    .print-card .copy strong { font-weight: 700; }
+    .footnote { padding: 0 0 35px; color: #91a197; font-size: 13px; }
+    a:focus-visible { outline: 2px solid #77d8bc; outline-offset: 5px; }
+    @media (max-width: 900px) {
+      .shell { width: calc(100% - 40px); }
+      .demo { padding: 28px; }
+      .cards { gap: 12px; }
+      .glow-card { padding: 21px; }
+      .depth-card { padding: 21px; min-height: 355px; }
+      .depth-card .copy { left: 21px; right: 21px; bottom: 21px; font-size: 19px; }
+      .folder-front { padding-inline: 18px; min-height: 265px; }
+      .copy, .folder-front .copy { font-size: 18px; }
+    }
+    @media (max-width: 700px) {
+      .shell { width: calc(100% - 28px); }
+      .masthead { padding-top: 22px; padding-bottom: 30px; }
+      .masthead-top { font-size: 9px; gap: 12px; }
+      .masthead h1 { margin-top: 26px; font-size: 31px; }
+      .masthead p { font-size: 16px; }
+      .jump-nav { gap: 6px; }
+      .jump-nav a { padding: 9px 11px; font-size: 12px; gap: 8px; }
+      .concept { padding-top: 20px; padding-bottom: 26px; }
+      .concept-meta { flex-wrap: wrap; gap: 8px 12px; }
+      .concept-meta h2 { font-size: 19px; }
+      .concept-meta p { width: 100%; margin-left: 0; text-align: left; font-size: 12px; }
+      .demo { padding: 23px 18px; border-radius: 14px; }
+      .demo-label { margin-bottom: 22px; font-size: 15px; }
+      .cards, .photo-cards, .print-cards { grid-template-columns: minmax(0,1fr); gap: 15px; }
+      .glow-card { min-height: 300px; padding: 25px; }
+      .glow-art { margin-bottom: 24px; }
+      .copy { font-size: 22px; }
+      .folder-card { min-height: 320px; }
+      .folder-front { min-height: 228px; }
+      .folder-front .copy { font-size: 21px; }
+      .depth-card { min-height: 325px; }
+      .depth-stage:nth-child(2) .depth-card { transform: none; }
+      .depth-card .copy { font-size: 22px; left: 24px; right: 24px; bottom: 24px; }
+      .photo-card, .photo-card:first-child { min-height: 330px; grid-row: auto; }
+      .photo-card .copy, .photo-card:nth-child(2) .copy { font-size: 23px; max-width: none; }
+      .print-card:first-child { grid-row: auto; min-height: 360px; }
+      .print-card { min-height: 220px; }
+      .print-card .copy { font-size: 23px; }
+      .print-card:first-child .copy { font-size: 31px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="masthead shell">
+    <div class="masthead-top"><span>BLACK EM DOBRO / EXPLORAÇÕES VISUAIS</span><a href="/v3/#conteudo-live">Voltar para a V3</a></div>
+    <h1>O mercado de programação mudou, e quem não se preparar fica para trás.</h1>
+    <p>Cinco direções para os cards da live. <strong>Mesmos textos, outras cores, materiais e composições.</strong> Passe o mouse nos cards para ver os detalhes.</p>
+    <nav class="jump-nav" aria-label="Direções visuais"><a href="#vidro"><span>01</span>Vidro e luz</a><a href="#pastas"><span>02</span>Pastas</a><a href="#cores"><span>03</span>Cores e 3D</a><a href="#fotos"><span>04</span>Fotográfico</a><a href="#editorial"><span>05</span>Editorial</a></nav>
+  </header>
+  <main class="shell">
+    <section class="concept" id="vidro" aria-labelledby="title-glow">
+      <div class="concept-meta"><span class="concept-number">01 /</span><h2 id="title-glow">Vidro e luz</h2><p>Sem foto · inspiração: <a href="https://21st.dev/@ravikatiyar162/components/glowing-card" target="_blank" rel="noreferrer">Glowing Card</a></p></div>
+      <div class="demo glow-demo"><h3 class="demo-label">O que vamos te mostrar na live</h3><div class="cards">
+        <article class="glow-card"><span class="micro">01 / Mercado</span><svg class="glow-art" viewBox="0 0 120 100" aria-hidden="true"><path class="faint" d="M5 82H115M5 58H115M5 34H115M28 7V92M60 7V92M92 7V92"/><path d="M8 76L33 61L53 68L79 33L111 14M94 14H111V31"/><circle cx="33" cy="61" r="3"/><circle cx="79" cy="33" r="3"/></svg><p class="copy">Por que a <strong>programação está mudando</strong> e o que isso muda para quem está começando.</p></article>
+        <article class="glow-card"><span class="micro">02 / Builder</span><svg class="glow-art" viewBox="0 0 120 100" aria-hidden="true"><path class="faint" d="M15 71L60 94L105 71M15 52L60 75L105 52"/><path d="M60 5L101 27V71L60 94L19 71V27Z M19 27L60 49L101 27M60 49V94"/><path d="M60 21L87 35L60 50L33 35Z"/></svg><p class="copy">O que é um <strong>Builder</strong> e como ele faz o <strong>primeiro dinheiro com IA</strong>.</p></article>
+        <article class="glow-card"><span class="micro">03 / Ao vivo</span><svg class="glow-art" viewBox="0 0 120 100" aria-hidden="true"><circle class="faint" cx="60" cy="50" r="44"/><circle cx="60" cy="50" r="34"/><path d="M60 25V50L79 60M60 6V13M60 87V94M16 50H23M97 50H104"/><circle cx="60" cy="50" r="3"/></svg><p class="copy">A <strong>condição especial</strong> da Black em Dobro Infinita. Ela <strong>só abre ao vivo</strong>.</p></article>
+      </div></div>
+    </section>
+    <section class="concept" id="pastas" aria-labelledby="title-folder">
+      <div class="concept-meta"><span class="concept-number">02 /</span><h2 id="title-folder">Pastas de projetos</h2><p>Fundo claro + capas reais · inspiração: <a href="https://21st.dev/@uvain/components/folder-card" target="_blank" rel="noreferrer">Folder Card</a></p></div>
+      <div class="demo folder-demo"><h3 class="demo-label">O que vamos te mostrar na live</h3><div class="cards">
+        <article class="folder-card"><div class="folder-back"><img src="/assets/banner-bf-final.png" alt="" loading="lazy"></div><div class="folder-sheet" aria-hidden="true"></div><div class="folder-front"><span class="micro">01 / O novo mercado</span><p class="copy">Por que a <strong>programação está mudando</strong> e o que isso muda para quem está começando.</p></div></article>
+        <article class="folder-card"><div class="folder-back"><img src="/assets/banner-bf-final.png" alt="" loading="lazy"></div><div class="folder-sheet" aria-hidden="true"></div><div class="folder-front"><span class="micro">02 / Construir com IA</span><p class="copy">O que é um <strong>Builder</strong> e como ele faz o <strong>primeiro dinheiro com IA</strong>.</p></div></article>
+        <article class="folder-card"><div class="folder-back"><img src="/assets/gemeos.webp" alt="" loading="lazy"></div><div class="folder-sheet" aria-hidden="true"></div><div class="folder-front"><span class="micro">03 / A Black em Dobro</span><p class="copy">A <strong>condição especial</strong> da Black em Dobro Infinita. Ela <strong>só abre ao vivo</strong>.</p></div></article>
+      </div></div>
+    </section>
+    <section class="concept" id="cores" aria-labelledby="title-depth">
+      <div class="concept-meta"><span class="concept-number">03 /</span><h2 id="title-depth">Cores e profundidade</h2><p>Verde, terracota e areia · inspiração: <a href="https://21st.dev/@shailendrakumar19999/components/animated-3d-card" target="_blank" rel="noreferrer">Animated 3D Card</a></p></div>
+      <div class="demo depth-demo"><h3 class="demo-label">O que vamos te mostrar na live</h3><div class="cards">
+        <div class="depth-stage"><article class="depth-card"><span class="micro">01 / Mercado</span><div class="depth-art" aria-hidden="true"><span class="depth-code">&lt;/&gt;</span></div><p class="copy">Por que a <strong>programação está mudando</strong> e o que isso muda para quem está começando.</p></article></div>
+        <div class="depth-stage"><article class="depth-card"><span class="micro">02 / Builder</span><div class="depth-art" aria-hidden="true"><span class="depth-cube"></span></div><p class="copy">O que é um <strong>Builder</strong> e como ele faz o <strong>primeiro dinheiro com IA</strong>.</p></article></div>
+        <div class="depth-stage"><article class="depth-card"><span class="micro">03 / Ao vivo</span><div class="depth-art" aria-hidden="true"><span class="depth-ticket"><small>NOVEMBRO</small><b>05</b></span></div><p class="copy">A <strong>condição especial</strong> da Black em Dobro Infinita. Ela <strong>só abre ao vivo</strong>.</p></article></div>
+      </div></div>
+    </section>
+    <section class="concept" id="fotos" aria-labelledby="title-photo">
+      <div class="concept-meta"><span class="concept-number">04 /</span><h2 id="title-photo">Pôsteres fotográficos</h2><p>Imagens reais + enquadramento assimétrico</p></div>
+      <div class="demo photo-demo"><h3 class="demo-label">O que vamos te mostrar na live</h3><div class="photo-cards">
+        <article class="photo-card"><img src="/assets/gemeos.webp" alt="" loading="lazy"><span class="micro">01 / Mercado</span><p class="copy">Por que a <strong>programação está mudando</strong> e o que isso muda para quem está começando.</p></article>
+        <article class="photo-card"><img src="/assets/banner-bf-final.png" alt="" loading="lazy"><span class="micro">02 / Builder</span><p class="copy">O que é um <strong>Builder</strong> e como ele faz o <strong>primeiro dinheiro com IA</strong>.</p></article>
+        <article class="photo-card"><img src="/assets/banner-bf-final.png" alt="" loading="lazy"><span class="micro">03 / Ao vivo</span><p class="copy">A <strong>condição especial</strong> da Black em Dobro Infinita. Ela <strong>só abre ao vivo</strong>.</p></article>
+      </div></div>
+    </section>
+    <section class="concept" id="editorial" aria-labelledby="title-print">
+      <div class="concept-meta"><span class="concept-number">05 /</span><h2 id="title-print">Mosaico editorial</h2><p>Sem imagem · cor sólida, tipografia e contraste</p></div>
+      <div class="demo print-demo"><h3 class="demo-label">O que vamos te mostrar na live</h3><div class="print-cards">
+        <article class="print-card"><span class="micro">01 / Mercado <span aria-hidden="true">↗</span></span><span class="print-mark" aria-hidden="true">&gt;_</span><p class="copy">Por que a <strong>programação está mudando</strong> e o que isso muda para quem está começando.</p></article>
+        <article class="print-card"><span class="micro">02 / Builder <span aria-hidden="true">[ + ]</span></span><p class="copy">O que é um <strong>Builder</strong> e como ele faz o <strong>primeiro dinheiro com IA</strong>.</p></article>
+        <article class="print-card"><span class="micro">03 / Ao vivo <span>05 NOV · 20H</span></span><p class="copy">A <strong>condição especial</strong> da Black em Dobro Infinita. Ela <strong>só abre ao vivo</strong>.</p></article>
+      </div></div>
+    </section>
+    <p class="footnote">Estudo visual local para a seção da live da Black em Dobro Infinita.</p>
+  </main>
+</body>
+</html>
