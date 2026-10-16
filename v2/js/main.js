@@ -1,7 +1,10 @@
 document.documentElement.classList.add("js");
 
 const topbar = document.querySelector(".topbar");
-const updateTopbar = () => topbar?.classList.toggle("is-hidden", window.scrollY > 24);
+const updateTopbar = () => {
+  topbar.classList.toggle("is-hidden", !topbar.hasAttribute("data-persistent") && window.scrollY > 24);
+  topbar.classList.toggle("is-scrolled", window.scrollY > 24);
+};
 if (topbar) {
   window.addEventListener("scroll", updateTopbar, { passive: true });
   updateTopbar();
@@ -176,8 +179,9 @@ if (dock && hero && signup && "IntersectionObserver" in window) {
 }
 
 /* Reveal ao rolar --------------------------------------------------------- */
+const isV3 = document.body.classList.contains("v3");
 const revealTargets = document.querySelectorAll(
-  ".section-head, .narrative, .versus, .chips, .tile, .path, .timeline li, .mantra, .duo-card, .founders, .manifesto blockquote, .signup"
+  isV3 ? "[data-enter]" : ".section-head, .narrative, .versus, .chips, .tile, .path, .timeline li, .mantra, .duo-card, .founders, .manifesto blockquote, .signup"
 );
 
 if ("IntersectionObserver" in window) {
@@ -192,7 +196,7 @@ if ("IntersectionObserver" in window) {
     { rootMargin: "0px 0px -8% 0px" }
   );
   revealTargets.forEach((el) => {
-    el.classList.add("reveal");
+    el.classList.add(isV3 ? "enter" : "reveal");
     observer.observe(el);
   });
 }

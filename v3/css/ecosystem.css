@@ -1,0 +1,67 @@
+.ecosystem-section { background: radial-gradient(ellipse at 12% 30%,#10382d 0,transparent 48%),#060c09; border-block: 1px solid #a5d9be14; }
+.ecosystem-section :where(h3,h4,p,dl,dt,dd) { margin: 0; }
+.ecosystem-heading { max-width: 1000px; margin-bottom: 64px; }
+.ecosystem-heading .eyebrow { margin-bottom: 18px; color: #8edac4; }
+.ecosystem-heading .title { max-width: 24em; font-size: clamp(32px,3.6vw,46px); line-height: 1.15; }
+.ecosystem-layout { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); align-items: start; gap: 64px; }
+.ecosystem-visual { position: sticky; top: calc(var(--topbar) + 20px); }
+.ecosystem-art { position: relative; width: 100%; max-width: 460px; aspect-ratio: 1; margin: 0 auto 32px; }
+.ecosystem-art svg { display: block; width: 100%; height: 100%; }
+.ecosystem-art .universe-motion { transform-origin: 200px 200px; }
+.ecosystem-globe { animation: universe-spin 20s linear infinite; }
+.ecosystem-orbit { animation: universe-spin 16s linear infinite; }
+.ecosystem-orbit--reverse { animation-duration: 24s; animation-direction: reverse; }
+.ecosystem-satellites { animation: universe-spin 32s linear infinite; }
+.ecosystem-node { position: absolute; padding: 8px 12px; border: 1px solid #6aac923d; border-radius: 4px; background: #0b2019; color: #b8ead6; font: 400 11px/1.2 var(--font-mono); }
+.ecosystem-node--builders { top: 16%; left: 0; }
+.ecosystem-node--devquest { bottom: 18%; left: 4%; }
+.ecosystem-node--formations { top: 25%; right: -2%; }
+.ecosystem-node--tools { bottom: 9%; right: 0; }
+.ecosystem-visual h3 { margin-bottom: 16px; color: #f0f8f3; font-size: clamp(23px,2vw,28px); line-height: 1.2; letter-spacing: -.025em; }
+.ecosystem-visual>p { max-width: 40ch; color: #afc6b9; font-size: 17px; line-height: 1.65; }
+.ecosystem-inventory { min-width: 0; border: 1px solid #899a763d; border-radius: 16px; background: linear-gradient(145deg,#192317b3,#0c130fa6); }
+.ecosystem-list-heading { padding: 26px 28px; border-bottom: 1px solid #a7bc8b26; }
+.ecosystem-list-heading h3 { margin-bottom: 8px; color: #f0f8f3; font-size: 20px; line-height: 1.25; }
+.ecosystem-list-heading>p { color: #9cb4a7; font-size: 13px; }
+.ecosystem-products { margin: 0; padding-inline: 28px; }
+.ecosystem-products>div { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 16px; padding-block: 17px; border-bottom: 1px solid #a7bc8b26; }
+.ecosystem-products>div:last-child { border-bottom: 0; }
+.ecosystem-products dt { color: #e0e8df; font-size: 15px; line-height: 1.5; }
+.ecosystem-products dd { color: #f0f6ec; font-size: 15px; font-weight: 500; line-height: 1.5; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ecosystem-inventory small { display: inline-block; margin-left: 8px; color: #9cbda7; font-size: 11px; font-weight: 400; line-height: 1.5; white-space: nowrap; }
+.ecosystem-total { padding: 28px; border-bottom: 1px solid #8eb96766; }
+.ecosystem-total-summary { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 24px; margin-bottom: 28px; }
+.ecosystem-total-label { margin-bottom: 10px; color: #e0ebda; font: 500 9px/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
+.ecosystem-total-summary>div>p:not([class]) { max-width: 27ch; color: #b8c8b6; font-size: 12px; line-height: 1.6; }
+.ecosystem-total-value { color: #f0f5e9; font-size: clamp(32px,3.2vw,44px); font-weight: 500; letter-spacing: -.05em; line-height: 1; text-decoration: line-through; text-decoration-color: #8bc99a; text-decoration-thickness: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ecosystem-total-value>span { color: #b4cfbf; font-size: .6em; }
+.ecosystem-offer-notice { margin-bottom: 18px; padding: 14px 16px; border: 1px solid #6d9e6e59; border-radius: 6px; background: #28442a45; color: #d1e6cd; font-size: 15px; line-height: 1.6; }
+.ecosystem-offer-notice strong { color: #a6e3ba; font-weight: 500; }
+.ecosystem-total>p:not([class]) { color: #acc5b6; font-size: 14px; line-height: 1.6; }
+.ecosystem-action { padding: 24px 28px 28px; border-top: 1px solid #a7bc8b26; }
+.ecosystem-action .btn { white-space: normal; text-align: center; }
+@media (min-width: 861px) and (max-height: 760px) {
+  .ecosystem-visual { top: calc(var(--topbar) + 12px); }
+  .ecosystem-art { max-width: 340px; margin-bottom: 20px; }
+}
+@media (max-width: 860px) {
+  .ecosystem-heading { margin-bottom: 36px; }
+  .ecosystem-layout { grid-template-columns: minmax(0,1fr); gap: 44px; }
+  .ecosystem-visual { position: static; }
+  .ecosystem-art { max-width: 340px; margin-bottom: 24px; }
+  .ecosystem-visual>p { max-width: 60ch; font-size: 16px; }
+  .ecosystem-visual h3 { font-size: 24px; }
+}
+@media (max-width: 560px) {
+  .ecosystem-node { padding: 7px 9px; font-size: 10px; }
+  .ecosystem-node--formations { right: 0; }
+  .ecosystem-list-heading, .ecosystem-total, .ecosystem-action { padding: 22px 18px; }
+  .ecosystem-list-heading h3 { font-size: 18px; }
+  .ecosystem-products { padding-inline: 18px; }
+  .ecosystem-products>div { gap: 12px; padding-block: 15px; }
+  .ecosystem-products dt { font-size: 14px; }
+  .ecosystem-products dd { font-size: 13px; }
+  .ecosystem-inventory small { display: block; margin: 4px 0 0; }
+  .ecosystem-total-summary { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .ecosystem-total-value { font-size: 38px; }
+}
