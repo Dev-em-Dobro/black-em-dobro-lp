@@ -1,9 +1,10 @@
 {
-  "rewrites": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
     {
-      "source": "/",
+      "src": "^/$",
       "has": [{ "type": "host", "value": "blackinfinita.devemdobro.com" }],
-      "destination": "/v2/index.html"
+      "dest": "/v2/index.html"
     }
   ]
 }
