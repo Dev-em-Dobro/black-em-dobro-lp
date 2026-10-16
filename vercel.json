@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "blackinfinita.devemdobro.com" }],
+      "destination": "/v2/index.html"
+    }
+  ]
+}
