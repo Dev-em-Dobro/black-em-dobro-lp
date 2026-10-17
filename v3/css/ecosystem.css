@@ -33,7 +33,8 @@
 .ecosystem-total-summary { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 24px; margin-bottom: 28px; }
 .ecosystem-total-label { margin-bottom: 10px; color: #e0ebda; font: 500 9px/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: .07em; }
 .ecosystem-total-summary>div>p:not([class]) { max-width: 27ch; color: #b8c8b6; font-size: 12px; line-height: 1.6; }
-.ecosystem-total-value { color: #f0f5e9; font-size: clamp(36px,4vw,52px); font-weight: 500; letter-spacing: -.05em; line-height: 1; text-decoration: line-through; text-decoration-color: var(--ds-vermelho); text-decoration-thickness: 3px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ecosystem-total-value { position: relative; width: max-content; color: #f0f5e9; font-size: clamp(36px,4vw,52px); font-weight: 500; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ecosystem-total-value::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 3px; background: var(--ds-vermelho); transform: translateY(-50%); }
 .ecosystem-total-value>span { color: #b4cfbf; font-size: .6em; }
 .ecosystem-offer-notice { margin-bottom: 18px; padding: 14px 16px; border: 1px solid #6d9e6e59; border-radius: 6px; background: #28442a45; color: #d1e6cd; font-size: 15px; line-height: 1.6; }
 .ecosystem-offer-notice strong { color: #a6e3ba; font-weight: 500; }
