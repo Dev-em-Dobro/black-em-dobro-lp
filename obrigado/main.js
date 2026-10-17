@@ -6,8 +6,7 @@ if (firstName) {
   history.replaceState(null, "", window.location.pathname + window.location.search);
 }
 
-// shortcut: falta a URL do SendFlow, preencher quando o link do grupo for fornecido.
-const sendflowUrl = "";
+const sendflowUrl = "https://sndflw.com/i/iZlK938yCEH6pUT03RbK";
 const sendflowLink = document.querySelector("[data-sendflow-link]");
 
 if (sendflowUrl) {

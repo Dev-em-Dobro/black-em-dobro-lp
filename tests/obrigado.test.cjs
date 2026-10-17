@@ -13,6 +13,7 @@ assert.match(page, /data-sendflow-link/);
 assert.match(page, /aria-disabled="true"/);
 assert.match(thanksScript, /textContent = `\$\{firstName\}, seu cadastro`/);
 assert.match(thanksScript, /history\.replaceState/);
+assert.match(thanksScript, /https:\/\/sndflw\.com\/i\/iZlK938yCEH6pUT03RbK/);
 
 for (const [, resource] of page.matchAll(/(?:src|href)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)) {
   if (resource === '/') continue;
