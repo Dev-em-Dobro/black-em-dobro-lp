@@ -12,7 +12,7 @@ for (const pathname of ['/v1', '/v1/', '/v1/index.html', '/v2', '/v2/', '/v2/ind
   assert.equal(route.headers.Location, '/', pathname);
 }
 
-for (const pathname of ['/', '/index.html', '/privacidade.html', '/cookies.html', '/api/subscribe', '/v2/css/style.css', '/v2/js/main.js', '/v3/css/ecosystem.css', '/v3/js/course-gallery.js', '/v3/assets/fundadores.png']) {
+for (const pathname of ['/', '/index.html', '/obrigado', '/obrigado/', '/privacidade.html', '/cookies.html', '/api/subscribe', '/v2/css/style.css', '/v2/js/main.js', '/v3/css/ecosystem.css', '/v3/js/course-gallery.js', '/v3/assets/fundadores.png']) {
   assert.equal(redirect(pathname), undefined, pathname);
 }
 
@@ -22,7 +22,7 @@ assert.equal((html.match(/data-waitlist/g) || []).length, 2);
 assert.equal(fs.existsSync(path.join(root, 'middleware.js')), false);
 assert.equal(fs.existsSync(path.join(root, 'v3/index.html')), false);
 
-for (const filename of ['index.html', 'privacidade.html', 'cookies.html']) {
+for (const filename of ['index.html', 'obrigado/index.html', 'privacidade.html', 'cookies.html']) {
   const source = fs.readFileSync(path.join(root, filename), 'utf8');
   assert.doesNotMatch(source, /href="\/v\d+\/#/);
   for (const [, resource] of source.matchAll(/(?:src|href)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)) {
