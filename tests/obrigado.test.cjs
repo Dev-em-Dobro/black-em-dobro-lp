@@ -10,6 +10,7 @@ const thanksScript = fs.readFileSync(path.join(root, 'obrigado/main.js'), 'utf8'
 assert.match(formScript, /window\.location\.assign\(`\/obrigado#nome=\$\{encodeURIComponent\(firstName\)\}`\)/);
 assert.match(page, /data-first-name/);
 assert.match(page, /data-sendflow-link/);
+assert.match(page, /class="whatsapp-icon"/);
 assert.match(page, /aria-disabled="true"/);
 assert.match(thanksScript, /textContent = `\$\{firstName\}, seu cadastro`/);
 assert.match(thanksScript, /history\.replaceState/);
