@@ -81,7 +81,6 @@ function checkField(input) {
 document.querySelectorAll("[data-waitlist]").forEach((form) => {
   const status = form.querySelector(".form-status");
   const button = form.querySelector('button[type="submit"]');
-  const done = form.parentElement.querySelector(".form-done");
   const inputs = [...form.querySelectorAll("input[name]")].filter((i) => rules[i.name]);
   const phone = form.querySelector('[name="whatsapp"]');
   const countryCode = form.querySelector('[name="countryCode"]');
@@ -142,12 +141,8 @@ document.querySelectorAll("[data-waitlist]").forEach((form) => {
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || "Não foi possível entrar na lista.");
 
-      form.hidden = true;
-      if (done) {
-        done.hidden = false;
-        done.setAttribute("tabindex", "-1");
-        done.focus();
-      }
+      const firstName = cleanName(form.nome.value).split(" ")[0];
+      window.location.assign(`/obrigado#nome=${encodeURIComponent(firstName)}`);
     } catch (error) {
       status.textContent = error.message || "Erro ao enviar o formulário.";
     } finally {
