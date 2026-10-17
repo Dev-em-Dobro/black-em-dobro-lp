@@ -2,9 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
-      "src": "^/$",
-      "has": [{ "type": "host", "value": "blackinfinita.devemdobro.com" }],
-      "dest": "/v2/index.html"
+      "src": "^/v[0-9]+(?:/(?!css/|js/|assets/).*)?$",
+      "headers": { "Location": "/" },
+      "status": 308
     }
   ]
 }
