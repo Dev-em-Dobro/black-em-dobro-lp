@@ -17,6 +17,7 @@ assert.match(thanksScript, /textContent = `\$\{firstName\}, seu cadastro`/);
 assert.match(thanksScript, /history\.replaceState/);
 assert.match(thanksScript, /https:\/\/sndflw\.com\/i\/iZlK938yCEH6pUT03RbK/);
 assert.match(style, /@media \(max-width: 760px\) and \(max-height: 700px\)/);
+assert.match(style, /h1 \{ max-width: none; font-size: clamp\(30px, 8vw, 40px\); \}/);
 
 for (const [, resource] of page.matchAll(/(?:src|href)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)) {
   if (resource === '/') continue;
