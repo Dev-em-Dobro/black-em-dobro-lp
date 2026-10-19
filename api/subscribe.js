@@ -31,7 +31,15 @@ async function acRequest(apiUrl, apiToken, path, payload) {
   return data;
 }
 
-const ALLOWED_FIELDS = new Set(["name", "email", "phone"]);
+const UTM_FIELDS = {
+  utm_source: "597",
+  utm_medium: "596",
+  utm_campaign: "595",
+  utm_term: "598",
+  utm_content: "599",
+};
+const SIGNUP_DATE_FIELD = "600";
+const ALLOWED_FIELDS = new Set(["name", "email", "phone", ...Object.keys(UTM_FIELDS)]);
 
 function readPayload(body) {
   if (!body || typeof body !== "object" || Array.isArray(body)) {
@@ -63,7 +71,17 @@ function readPayload(body) {
     return { error: "WhatsApp inválido." };
   }
 
-  return { name: cleanName, email: cleanEmail, phone: digits };
+  const utm = {};
+  for (const key of Object.keys(UTM_FIELDS)) {
+    if (body[key] == null || body[key] === "") continue;
+    if (typeof body[key] !== "string" || body[key].length > 200) {
+      return { error: "Dados inválidos." };
+    }
+    const value = body[key].trim().replace(/[\u0000-\u001F\u007F]/g, "").slice(0, 200);
+    if (value) utm[key] = value;
+  }
+
+  return { name: cleanName, email: cleanEmail, phone: digits, utm };
 }
 
 module.exports = async function handler(req, res) {
@@ -89,10 +107,22 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: error.message });
   }
 
+  const signupDate = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const fieldValues = [
+    { field: SIGNUP_DATE_FIELD, value: signupDate },
+    ...Object.entries(payload.utm).map(([key, value]) => ({ field: UTM_FIELDS[key], value })),
+  ];
+
   const contact = {
     email: payload.email,
     firstName: payload.name,
     phone: payload.phone,
+    fieldValues,
   };
 
   try {

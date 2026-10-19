@@ -77,6 +77,32 @@ function checkField(input) {
   return ok;
 }
 
+/* UTMs da URL, mantidos na sessão até o envio --------------------------- */
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+
+function currentUtm() {
+  const params = new URLSearchParams(window.location.search);
+  let stored = {};
+  try {
+    const parsed = JSON.parse(sessionStorage.getItem("bf26_utm") || "{}");
+    if (parsed && typeof parsed === "object") stored = parsed;
+  } catch {
+    stored = {};
+  }
+
+  UTM_KEYS.forEach((key) => {
+    const value = (params.get(key) || "").trim().replace(/[\u0000-\u001F\u007F]/g, "").slice(0, 200);
+    if (value) stored[key] = value;
+  });
+
+  try {
+    sessionStorage.setItem("bf26_utm", JSON.stringify(stored));
+  } catch {
+    /* sem storage, os campos ocultos ficam só com o valor desta página */
+  }
+  return stored;
+}
+
 /* Formulário ------------------------------------------------------------ */
 document.querySelectorAll("[data-waitlist]").forEach((form) => {
   const status = form.querySelector(".form-status");
@@ -127,6 +153,11 @@ document.querySelectorAll("[data-waitlist]").forEach((form) => {
     const label = button.textContent;
     button.disabled = true;
     button.textContent = "Enviando...";
+    const utm = currentUtm();
+    UTM_KEYS.forEach((key) => {
+      const input = form.querySelector(`[name="${key}"]`);
+      if (input) input.value = utm[key] || "";
+    });
 
     try {
       const response = await fetch("/api/subscribe", {
@@ -136,6 +167,7 @@ document.querySelectorAll("[data-waitlist]").forEach((form) => {
           name: cleanName(form.nome.value),
           email: form.email.value.trim().toLowerCase(),
           phone: digits(countryCode.value) + digits(form.whatsapp.value),
+          ...Object.fromEntries(UTM_KEYS.filter((key) => utm[key]).map((key) => [key, utm[key]])),
         }),
       });
       const result = await response.json().catch(() => ({}));
