@@ -14,10 +14,12 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.equal((html.match(/data-waitlist|<form\b/g) || []).length, 0, slug);
   assert.doesNotMatch(html, /5 de novembro|às 20h|Dia 5|data-countdown|countdown\.js/);
   assert.equal(sections.length, 11, slug);
-  assert.equal((html.match(/data-checkout/g) || []).length, sections.length + 1, slug);
-  assert.equal((html.split(checkout).length - 1), sections.length + 1, slug);
+  assert.doesNotMatch(html, /topbar-cta/);
+  assert.equal((html.match(/data-checkout/g) || []).length, sections.length, slug);
+  assert.equal((html.split(checkout).length - 1), sections.length, slug);
   assert.match(html, new RegExp(`class="ecosystem-final-value">R\\$ ${price}<span>,00</span>`));
   assert.equal(html.includes('Condição Exclusiva para alunos por tempo limitado!'), ribbon, slug);
+  if (ribbon) assert.ok(html.indexOf('offer-ribbon') < html.indexOf('hero-banner'), slug);
   assert.match(html, /href="https:\/\/api\.whatsapp\.com\/send\/\?phone=5551989875708"/);
 }
 
