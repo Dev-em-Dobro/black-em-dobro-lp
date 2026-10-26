@@ -1,0 +1,90 @@
+.offer-ribbon {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #b45309, #f59e0b 42%, #fbbf24);
+  color: #1c1406;
+  font-weight: 700;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.offer-card { display: grid; gap: 14px; align-content: center; }
+.offer-card-label {
+  margin: 0;
+  color: #8be4d5;
+  font: 600 11px/1.4 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.offer-card-price {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(40px, 4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.offer-card-price span { font-size: .55em; font-weight: 500; color: #b7e8df; }
+.offer-card .hero-form-note { margin: 0; }
+
+.ecosystem-final {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 16px;
+  border: 1px solid #2dd4bf66;
+  border-radius: 8px;
+  background: #12352c;
+}
+.ecosystem-final .ecosystem-total-label { margin: 0 0 6px; }
+.ecosystem-final-copy { min-width: min(100%, 220px); }
+.ecosystem-final-copy p:last-child { margin: 0; color: #d1e6cd; font-size: 14px; line-height: 1.5; }
+.ecosystem-final-value {
+  margin: 0;
+  color: #5eead4;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ecosystem-final-value span { font-size: .55em; color: #b7e8df; }
+
+.offer-cta { margin-top: 36px; }
+.offer-cta--center { display: flex; justify-content: center; }
+.offer-cta .btn { min-width: min(100%, 340px); text-align: center; }
+
+@media (min-width: 861px) {
+  body.oferta .hero .offer-card { margin-right: 72px; }
+}
+
+.whatsapp-float {
+  position: fixed;
+  z-index: 30;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 10px 24px #00000055;
+}
+.whatsapp-float:hover { background: #1ebe5d; }
+.whatsapp-float:focus-visible { outline: 2px solid #bbf7d0; outline-offset: 3px; }
+.whatsapp-float svg { width: 32px; height: 32px; }
+body.oferta .v3-footer { padding-bottom: 96px; }
+
+@media (max-width: 560px) {
+  .offer-cta .btn { width: 100%; }
+  .ecosystem-final-value { font-size: 40px; }
+  .whatsapp-float { right: 12px; bottom: 12px; }
+}
