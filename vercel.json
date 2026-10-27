@@ -2,7 +2,22 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
-      "src": "^/v(?!(?:1|2|3)(?:/index\\.html|/?)$)[0-9]+(?:/(?!css/|js/|assets/).*)?$",
+      "src": "^/v1(?:/index\\.html|/)?$",
+      "headers": { "Location": "/alunos-bf" },
+      "status": 308
+    },
+    {
+      "src": "^/v2(?:/index\\.html|/)?$",
+      "headers": { "Location": "/alunos-dq" },
+      "status": 308
+    },
+    {
+      "src": "^/v3(?:/index\\.html|/)?$",
+      "headers": { "Location": "/oferta-geral" },
+      "status": 308
+    },
+    {
+      "src": "^/v[0-9]+(?:/(?!css/|js/|assets/).*)?$",
       "headers": { "Location": "/" },
       "status": 308
     }

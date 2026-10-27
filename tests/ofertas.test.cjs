@@ -3,9 +3,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const offers = [
-  ['v1', '597', 'https://pay.hub.la/YKPMuMwSBhPBb7UUuDlX', true],
-  ['v2', '797', 'https://pay.hub.la/NZKc6aZXwbD4ihw9vvPN', true],
-  ['v3', '997', 'https://pay.hub.la/6njIGlJgossHQysj6WA7', false],
+  ['alunos-bf', '597', 'https://pay.hub.la/YKPMuMwSBhPBb7UUuDlX', true],
+  ['alunos-dq', '797', 'https://pay.hub.la/NZKc6aZXwbD4ihw9vvPN', true],
+  ['oferta-geral', '997', 'https://pay.hub.la/6njIGlJgossHQysj6WA7', false],
 ];
 
 for (const [slug, price, checkout, ribbon] of offers) {
@@ -27,4 +27,4 @@ const home = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
 assert.equal((home.match(/data-waitlist/g) || []).length, 2);
 assert.match(home, /5 de novembro/);
 
-console.log('Ofertas v1, v2 e v3 sem formulário, com preço e checkout próprios: OK');
+console.log('Ofertas alunos-bf, alunos-dq e oferta-geral sem formulário, com preço e checkout próprios: OK');
