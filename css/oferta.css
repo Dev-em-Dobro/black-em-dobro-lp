@@ -95,6 +95,7 @@
   font-variant-numeric: tabular-nums;
 }
 .offer-card-price span { font-size: .55em; font-weight: 500; color: #b7e8df; }
+.offer-card-price small ~ span { font-size: inherit; font-weight: inherit; color: inherit; }
 .offer-card-price small {
   display: inline;
   margin-right: 8px;
