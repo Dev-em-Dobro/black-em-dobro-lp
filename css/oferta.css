@@ -11,7 +11,70 @@
   text-align: center;
 }
 
+.offer-ribbon--general {
+  background: var(--ds-laranja);
+  color: #000;
+  font-size: clamp(16px, 1.8vw, 22px);
+  text-wrap: balance;
+}
+
 .offer-card { display: grid; gap: 14px; align-content: center; }
+@media (min-width: 861px) {
+  body.oferta .hero-split { row-gap: 0; }
+}
+@media (max-width: 860px) {
+  body.oferta .hero-split { display: flex; flex-direction: column; gap: 0; }
+  body.oferta .hero-form { margin: 8px 0 0; }
+  body.oferta .hero-form { order: 1; }
+  body.oferta .offer-lot { order: 2; margin-top: 8px; }
+  body.oferta .hero-copy { order: 0; }
+}
+.offer-lot[hidden] { display: none; }
+.offer-lot { width: 100%; max-width: 444px; margin-top: 0; }
+.offer-lot-progress {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #484848;
+  border-radius: 999px;
+  background: #383838;
+  box-shadow: 0 0 0 2px #ffffff12;
+}
+.offer-lot-progress::-webkit-progress-bar { background: #383838; border-radius: 999px; }
+.offer-lot-progress::-webkit-progress-value { background: #45d6bf; border-radius: 999px; }
+.offer-lot-progress::-moz-progress-bar { background: #45d6bf; border-radius: 999px; }
+.offer-lot-status { margin: 14px 0 24px; color: #d1ced4; font-size: clamp(18px, 2vw, 22px); line-height: 1.35; }
+.offer-lot-timer { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 3vw, 24px); max-width: 360px; }
+.offer-lot-unit { position: relative; display: grid; gap: 5px; text-align: center; }
+.offer-lot-unit > span { color: #fff; font-size: 12px; line-height: 1.4; text-transform: uppercase; }
+.offer-lot-unit > strong {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: #45d6bf;
+  color: #000;
+  font-size: clamp(30px, 8vw, 46px);
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.offer-lot-unit:not(:last-child)::after {
+  content: ':';
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  width: clamp(14px, 3vw, 24px);
+  height: calc(100% - 22px);
+  color: #45d6bf;
+  font-size: 32px;
+}
+
 .offer-card-label {
   margin: 0;
   color: #8be4d5;
@@ -55,6 +118,24 @@
   font-variant-numeric: tabular-nums;
 }
 .ecosystem-final-value span { font-size: .55em; color: #b7e8df; }
+
+.ecosystem-inventory .lifetime-badge {
+  display: inline-flex;
+  align-items: center;
+  margin: 4px 0 4px 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #b8f5cc;
+  color: #0c2818;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+  .ecosystem-inventory .lifetime-badge { display: flex; width: fit-content; margin: 6px 0 0; }
+}
 
 .offer-cta { margin-top: 36px; }
 .offer-cta--center { display: flex; justify-content: center; }
