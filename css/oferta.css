@@ -20,6 +20,9 @@
 
 .offer-card { display: grid; gap: 14px; align-content: center; }
 @media (min-width: 861px) {
+  body.oferta .hero-banner::after {
+    background: linear-gradient(transparent 0 88%, rgba(0, 0, 0, .1) 96%, var(--bg));
+  }
   body.oferta .hero-split { row-gap: 0; }
 }
 @media (max-width: 860px) {

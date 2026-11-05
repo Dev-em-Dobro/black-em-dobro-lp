@@ -7,9 +7,9 @@
 
 .current-lot-inner {
   display: grid;
-  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: clamp(24px, 5vw, 72px);
+  gap: 24px;
 }
 
 .current-lot-heading .eyebrow {
@@ -32,6 +32,13 @@
   background: linear-gradient(135deg, #18392c, #101f19 76%);
   box-shadow: 0 20px 60px #0003, inset 0 1px #d6ffe513;
 }
+
+.current-lot-bonuses { display: grid; grid-template-columns: 1fr; gap: 0; }
+.current-lot-bonus { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); align-items: center; gap: 12px 32px; padding: 22px 0; }
+.current-lot-bonus:not(:first-child) { border-top: 1px solid #a5dfbd38; }
+.current-lot-bonus .current-lot-label { grid-column: 1 / -1; margin-bottom: 0; }
+.current-lot-bonus .current-lot-description { margin-top: 0; }
+.current-lot-bonuses .current-lot-period { grid-column: 1 / -1; margin-top: 0; }
 
 .current-lot-label {
   margin: 0 0 18px;
@@ -69,7 +76,9 @@
 @media (max-width: 700px) {
   .current-lot-inner { grid-template-columns: 1fr; gap: 22px; }
   .current-lot-card { padding: 24px; }
-  .current-lot-card h3 { font-size: clamp(26px, 7vw, 34px); }
+  .current-lot-bonus { grid-template-columns: 1fr; gap: 10px; }
+  .current-lot-bonus .current-lot-label { grid-column: auto; }
+  .current-lot-card h3 { font-size: clamp(24px, 6vw, 34px); }
   .current-lot-description { font-size: 16px; }
   .current-lot-period { font-size: 14px; }
 }
