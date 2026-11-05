@@ -50,6 +50,13 @@
   text-wrap: balance;
 }
 
+.current-lot-description {
+  margin: 16px 0 0;
+  color: #dce9df;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
 .current-lot-period {
   margin: 22px 0 0;
   padding-top: 18px;
@@ -63,5 +70,6 @@
   .current-lot-inner { grid-template-columns: 1fr; gap: 22px; }
   .current-lot-card { padding: 24px; }
   .current-lot-card h3 { font-size: clamp(26px, 7vw, 34px); }
+  .current-lot-description { font-size: 16px; }
   .current-lot-period { font-size: 14px; }
 }
