@@ -24,8 +24,8 @@ const context = {
 };
 vm.runInNewContext(script, context);
 assert.equal(block.hidden, false, 'visível também antes de quinta às 20h');
-assert.deepEqual(fields.map(field => field.textContent), ['02', '03', '59', '01'], 'conta o tempo real até o encerramento antes da abertura');
-assert.equal(progress.value, 100);
+assert.deepEqual(fields.map(field => field.textContent), ['01', '03', '59', '01'], 'conta o tempo real até o encerramento antes da abertura');
+assert.equal(progress.value, 50);
 
 function at(instant, expected) {
   now = Date.parse(instant);
@@ -33,15 +33,15 @@ function at(instant, expected) {
   assert.equal(block.hidden, false, instant);
   assert.deepEqual(fields.map(field => field.textContent), expected, instant);
 }
-at('2026-11-05T23:00:00Z', ['02', '03', '59', '00']);
+at('2026-11-05T23:00:00Z', ['01', '03', '59', '00']);
+assert.equal(progress.value, 50);
+at('2026-11-06T09:59:30-03:00', ['00', '13', '59', '30']);
+assert.equal(progress.value, 75, 'barra avança conforme o lote se aproxima do fim');
+at('2026-11-06T23:58:59-03:00', ['00', '00', '00', '01']);
+at('2026-11-06T23:59:00-03:00', ['00', '00', '00', '00']);
 assert.equal(progress.value, 100);
-at('2026-11-06T21:59:30-03:00', ['01', '01', '59', '30']);
-assert.equal(progress.value, 50, 'barra acompanha o tempo restante');
-at('2026-11-07T23:58:59-03:00', ['00', '00', '00', '01']);
-at('2026-11-07T23:59:00-03:00', ['00', '00', '00', '00']);
-assert.equal(progress.value, 0);
 assert.equal(status.textContent, 'Lote promocional encerrado.');
 at('2026-11-08T12:00:00-03:00', ['00', '00', '00', '00']);
-assert.equal(progress.value, 0, 'não reinicia após o prazo');
+assert.equal(progress.value, 100, 'não reinicia após o prazo');
 vm.runInNewContext(script, { document: { querySelector: () => null } });
 console.log('Prazo da oferta: início, fuso de Brasília, barra e encerramento OK');

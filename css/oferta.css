@@ -95,6 +95,16 @@
   font-variant-numeric: tabular-nums;
 }
 .offer-card-price span { font-size: .55em; font-weight: 500; color: #b7e8df; }
+.offer-card-price small {
+  display: inline;
+  margin-right: 8px;
+  color: #b7e8df;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+.offer-card-cash-price { margin: 0; color: #b7e8df; font-size: 16px; line-height: 1.4; }
 .offer-card .hero-form-note { margin: 0; }
 
 .ecosystem-final {
@@ -164,7 +174,7 @@
 }
 .whatsapp-float:hover { background: #1ebe5d; }
 .whatsapp-float:focus-visible { outline: 2px solid #bbf7d0; outline-offset: 3px; }
-.whatsapp-float svg { width: 32px; height: 32px; }
+.whatsapp-float svg { display: block; width: 32px; height: 32px; overflow: visible; }
 body.oferta .v3-footer { padding-bottom: 96px; }
 
 @media (max-width: 560px) {
