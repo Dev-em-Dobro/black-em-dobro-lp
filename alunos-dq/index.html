@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="/v3/css/style.css?v=mobile-faces-high">
   <link rel="stylesheet" href="/v3/css/ecosystem.css?v=8">
   <link rel="stylesheet" href="/v3/css/builders.css?v=10">
-  <link rel="stylesheet" href="/css/oferta.css">
-  <link rel="stylesheet" href="/css/lote-atual.css?v=1">
+  <link rel="stylesheet" href="/css/oferta.css?v=lotes-2026">
+  <link rel="stylesheet" href="/css/lote-atual.css?v=lotes-2026">
 </head>
 <body class="v3 oferta">
   <!-- Google Tag Manager (noscript) -->
@@ -84,7 +84,7 @@
           <p class="hero-form-note">Acesso vitalício às aulas gravadas do DevQuest e Builders Club.</p>
           <a class="btn btn-primary btn-lg btn-block" data-checkout href="https://pay.hub.la/NZKc6aZXwbD4ihw9vvPN">Quero garantir por R$ 797</a>
         </div>
-        <div class="offer-lot" data-offer-period data-start="2026-11-05T20:00:00-03:00" data-end="2026-11-06T23:59:00-03:00" hidden>
+        <div class="offer-lot" data-offer-period hidden>
           <progress class="offer-lot-progress" max="100" value="100" aria-label="Tempo restante do lote promocional"></progress>
           <p class="offer-lot-status">Lote promocional com vagas limitadas!</p>
           <div class="offer-lot-timer" role="timer" aria-label="Tempo até o encerramento do lote">
@@ -97,34 +97,44 @@
       </div>
     </section>
 
-    <section class="v3-section current-lot" id="lote-atual" aria-labelledby="current-lot-title">
+    <section class="v3-section current-lot" id="lote-atual" aria-labelledby="current-lot-title" hidden>
       <div class="container current-lot-inner">
         <div class="current-lot-heading">
           <p class="eyebrow">Bônus da Black Infinita</p>
           <h2 id="current-lot-title">Bônus exclusivos desse lote</h2>
         </div>
         <div class="current-lot-card current-lot-bonuses">
-          <article class="current-lot-bonus">
+          <article class="current-lot-bonus" data-lot-bonus="freela">
             <p class="current-lot-label">Bônus 1</p>
             <h3>Participação no desafio Meu Primeiro Freela em 45 dias</h3>
             <p class="current-lot-description">Vamos te ajudar a vender e entregar seu primeiro freela em 45 dias para aprender a faturar com IA.</p>
           </article>
-          <article class="current-lot-bonus">
+          <article class="current-lot-bonus" data-lot-bonus="claude">
             <p class="current-lot-label">Bônus 2</p>
             <h3>Sorteio de três meses de Claude Pro</h3>
             <p class="current-lot-description">Três meses de acesso ao Claude Pro para acelerar seus projetos com IA.</p>
           </article>
-          <article class="current-lot-bonus">
+          <article class="current-lot-bonus" data-lot-bonus="orion">
             <p class="current-lot-label">Bônus 3</p>
             <h3>Orion Pro. 1 ano incluído.</h3>
             <p class="current-lot-description">Vamos abrir e mostrar ao vivo como ele entra na sua rotina de construção.</p>
           </article>
-          <article class="current-lot-bonus current-lot-bonus--limited">
+          <article class="current-lot-bonus current-lot-bonus--limited" data-lot-bonus="acompanhamento">
             <p class="current-lot-label">Bônus 4</p>
             <h3>Dois anos de acompanhamento, em vez de um.</h3>
             <p class="current-lot-description">Mais um ano nas duas frentes: monitorias e grupo de WhatsApp do DevQuest, comunidade e acompanhamento do Builders Club para vender e entregar projetos.</p>
           </article>
-          <p class="current-lot-period">Bônus válido até 6 de novembro, às 23h59.</p>
+          <article class="current-lot-bonus" data-lot-bonus="simone" hidden>
+            <p class="current-lot-label">Bônus 3</p>
+            <h3>Workshop com Simone</h3>
+            <p class="current-lot-description">Acesso ao workshop com Simone, incluído como bônus deste lote.</p>
+          </article>
+          <article class="current-lot-bonus" data-lot-bonus="sites" hidden>
+            <p class="current-lot-label">Bônus 3</p>
+            <h3>Workshop Desenvolvendo Sites Premium</h3>
+            <p class="current-lot-description">Aprenda a criar sites com acabamento profissional e valorizar seu portfólio.</p>
+          </article>
+          <p class="current-lot-period" data-lot-period></p>
         </div>
       </div>
     </section>
@@ -558,6 +568,6 @@
   <script src="/v3/js/ecosystem-motion.js" type="module"></script>
   <a class="whatsapp-float" href="https://api.whatsapp.com/send/?phone=5551989875708" target="_blank" rel="noopener noreferrer" aria-label="Falar com o time de vendas no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.4 7.9L3 21l1.6-4.6A9 9 0 1 1 21 11.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7h2l1 3-1.5 1a8 8 0 0 0 3.5 3.5l1-1.5 3 1v2a1 1 0 0 1-1 1A10 10 0 0 1 7 8a1 1 0 0 1 1-1Z" fill="currentColor"/></svg></a>
   <script src="/js/oferta.js" defer></script>
-  <script src="/js/prazo-oferta.js" defer></script>
+  <script src="/js/lote-atual.js?v=lotes-2026" defer></script>
 </body>
 </html>

@@ -1,43 +1,62 @@
 (() => {
   const section = document.querySelector('#lote-atual');
-  if (!section) return;
+  const block = document.querySelector('[data-offer-period]');
+  if (!section || !block) return;
 
-  const bonus = section.querySelector('[data-lot-bonus]');
-  const description = section.querySelector('[data-lot-description]');
-  const period = section.querySelector('[data-lot-period]');
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/Fortaleza', year: 'numeric', month: '2-digit', day: '2-digit',
-  });
   const lots = [
-    { start: '2026-11-05', end: '2026-11-07', bonus: 'Sorteio de 3 meses de Claude PRO', description: 'Ao se matricular até 06/11, você concorre ao sorteio de 3 meses de acesso ao Claude PRO para acelerar seus projetos com IA.', period: '05 e 06 de novembro, até 23h59.' },
-    { start: '2026-11-07', end: '2026-11-12', bonus: 'Acesso ao Orion Pro', description: 'Ao se matricular de 07 a 11/11, você garante acesso ao Orion Pro como bônus para avançar nos seus projetos.', period: 'De 07 a 11 de novembro, até 23h59.' },
-    { start: '2026-11-12', end: '2026-11-14', bonus: 'Você poderá participar do Desafio Meu Primeiro Cliente em 45 dias', description: 'Ao se matricular em 12 ou 13/11, você poderá participar do desafio e dar passos práticos em direção ao seu primeiro cliente em 45 dias.', period: '12 e 13 de novembro, até 23h59.' },
-    { start: '2026-11-14', end: '2026-11-19', bonus: 'Acesso ao Workshop Como Ser Aprovado em Qualquer Entrevista Dev', description: 'Ao se matricular de 14 a 18/11, você recebe acesso a um workshop com especialista em empregabilidade para se preparar melhor para entrevistas na área dev.', period: 'De 14 a 18 de novembro, até 23h59.' },
-    { start: '2026-11-19', end: '2026-11-26', bonus: 'Acesso ao Workshop Desenvolvendo Sites Premium', description: 'Ao se matricular de 19 a 25/11, você recebe acesso ao workshop para aprender a criar sites com acabamento profissional e valorizar seu portfólio.', period: 'De 19 a 25 de novembro, até 23h59.' },
-  ];
+    { number: 1, start: '2026-11-05T20:00:00-03:00', end: '2026-11-07T00:00:00-03:00', bonuses: ['freela', 'claude', 'orion', 'acompanhamento'] },
+    { number: 2, start: '2026-11-07T00:00:00-03:00', end: '2026-11-12T00:00:00-03:00', bonuses: ['freela', 'orion', 'acompanhamento'] },
+    { number: 3, start: '2026-11-12T00:00:00-03:00', end: '2026-11-19T00:00:00-03:00', bonuses: ['freela', 'orion', 'simone'] },
+    { number: 4, start: '2026-11-19T00:00:00-03:00', end: '2026-11-26T00:00:00-03:00', bonuses: ['freela', 'orion', 'sites'] },
+    { number: 5, start: '2026-11-29T00:00:00-03:00', end: '2026-12-03T00:00:00-03:00', bonuses: ['freela', 'orion', 'sites'] },
+  ].map(lot => ({ ...lot, start: Date.parse(lot.start), end: Date.parse(lot.end) }));
 
-  let displayedDate = '';
+  const bonuses = section.querySelectorAll('[data-lot-bonus]');
+  const period = section.querySelector('[data-lot-period]');
+  const progress = block.querySelector('progress');
+  const status = block.querySelector('.offer-lot-status');
+  const timer = block.querySelector('[role="timer"]');
+  const fields = ['days', 'hours', 'minutes', 'seconds'].map(unit => block.querySelector(`[data-offer-${unit}]`));
+  const dateFormatter = new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', day: 'numeric', month: 'long' });
+  let displayedLot;
 
-  function dateInFortaleza() {
-    const parts = Object.fromEntries(dateFormatter.formatToParts(new Date()).map(({ type, value }) => [type, value]));
-    return `${parts.year}-${parts.month}-${parts.day}`;
-  }
+  function update() {
+    const now = Date.now();
+    const current = lots.find(lot => now >= lot.start && now < lot.end);
+    const next = lots.find(lot => now < lot.start);
 
-  function updateLot() {
-    const today = dateInFortaleza();
-    if (today !== displayedDate) {
-      displayedDate = today;
-      const current = lots.find(({ start, end }) => today >= start && today < end);
+    if (displayedLot !== (current || null)) {
+      displayedLot = current || null;
       section.hidden = !current;
-      bonus.textContent = current?.bonus || '';
-      description.textContent = current?.description || '';
-      period.textContent = current?.period || '';
+      let number = 0;
+      bonuses.forEach(bonus => {
+        bonus.hidden = !current?.bonuses.includes(bonus.dataset.lotBonus);
+        if (!bonus.hidden) bonus.querySelector('.current-lot-label').textContent = `Bônus ${++number}`;
+      });
+      period.textContent = current
+        ? `Bônus válidos até ${dateFormatter.format(new Date(current.end - 1))}, às 23h59.`
+        : '';
     }
+
+    block.hidden = false;
+    const end = current ? current.end : next?.start;
+    const start = current ? current.start : lots.find(lot => lot.number === next?.number - 1)?.end ?? now;
+    timer.hidden = !end;
+    progress.hidden = !end;
+    timer.setAttribute('aria-label', current ? 'Tempo até o encerramento do lote' : 'Tempo até a abertura do próximo lote');
+    status.textContent = current
+      ? `Lote ${current.number} com vagas limitadas!`
+      : next ? `Matrículas ${next.number === 1 ? 'abrem' : 'reabrem'} em ${dateFormatter.format(new Date(next.start))}${next.number === 1 ? ', às 20h' : ''}.` : 'Lote promocional encerrado.';
+
+    const remaining = end ? Math.max(0, end - now) : 0;
+    const seconds = Math.ceil(remaining / 1000);
+    const values = [Math.floor(seconds / 86400), Math.floor(seconds % 86400 / 3600), Math.floor(seconds % 3600 / 60), seconds % 60];
+    fields.forEach((field, index) => { field.textContent = String(values[index]).padStart(2, '0'); });
+    progress.value = end > start ? 50 + (1 - Math.min(1, remaining / (end - start))) * 50 : 100;
   }
 
-  updateLot();
-  // Keeps an open page in sync when a new lot starts at midnight in Fortaleza.
-  setInterval(updateLot, 1000);
-  document.addEventListener('visibilitychange', updateLot);
-  window.addEventListener('pageshow', updateLot);
+  update();
+  setInterval(update, 1000);
+  document.addEventListener('visibilitychange', update);
+  window.addEventListener('pageshow', update);
 })();

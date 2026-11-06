@@ -15,11 +15,16 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.doesNotMatch(html, /5 de novembro|às 20h|Dia 5|data-countdown|countdown\.js/);
   assert.equal(sections.length, 11, slug);
   assert.match(html, /<section class="v3-section current-lot"[^>]*>/, slug);
-  assert.match(html, /<script src="\/js\/prazo-oferta\.js" defer><\/script>/, slug);
-  assert.doesNotMatch(html, /id="desafio-primeiro-freela"|id="conteudo-live"|\/js\/lote-atual\.js/);
-  assert.equal((html.match(/class="current-lot-bonus[" ]/g) || []).length, 4, slug);
+  assert.match(html, /<script src="\/js\/lote-atual\.js\?v=lotes-2026" defer><\/script>/, slug);
+  assert.doesNotMatch(html, /id="desafio-primeiro-freela"|id="conteudo-live"|\/js\/prazo-oferta\.js/);
+  assert.equal((html.match(/class="current-lot-bonus[" ]/g) || []).length, 6, slug);
+  assert.match(html, /id="lote-atual"[^>]* hidden>/, slug);
+  for (const bonus of ['freela', 'claude', 'orion', 'acompanhamento', 'simone', 'sites']) {
+    assert.equal((html.match(new RegExp(`data-lot-bonus="${bonus}"`, 'g')) || []).length, 1, `${slug}: ${bonus}`);
+  }
+  assert.match(html, /class="current-lot-period" data-lot-period/, slug);
   assert.equal((html.match(/data-offer-period/g) || []).length, 1, slug);
-  assert.match(html, /data-end="2026-11-06T23:59:00-03:00"/, slug);
+  assert.doesNotMatch(html, /data-start=|data-end=/, slug);
   assert.ok(html.indexOf('class="card signup-card offer-card hero-form"') < html.indexOf('data-offer-period'), slug);
   assert.doesNotMatch(html, /topbar-cta/);
   assert.equal((html.match(/data-checkout/g) || []).length, 10, slug);

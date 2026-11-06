@@ -32,7 +32,7 @@
   body.oferta .offer-lot { order: 2; margin-top: 8px; }
   body.oferta .hero-copy { order: 0; }
 }
-.offer-lot[hidden] { display: none; }
+.offer-lot[hidden], .offer-lot-timer[hidden], .offer-lot-progress[hidden] { display: none; }
 .offer-lot { width: 100%; max-width: 444px; margin-top: 0; }
 .offer-lot-progress {
   display: block;
