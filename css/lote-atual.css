@@ -1,4 +1,4 @@
-.current-lot[hidden] { display: none; }
+.current-lot[hidden], .current-lot-bonus[hidden] { display: none; }
 
 .current-lot {
   background: radial-gradient(ellipse at 82% 20%, #12382d 0%, transparent 56%), #07110e;
