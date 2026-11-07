@@ -64,7 +64,7 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'oferta-geral']) {
     assert.deepEqual(page.visible(), expected);
     assert.deepEqual(page.digits(), digits);
     assert.equal(page.period.textContent, `Bônus válidos até ${deadline}, às 23h59.`);
-    assert.match(page.status.textContent, new RegExp(`Lote ${index + 1} com vagas limitadas`));
+    assert.equal(page.status.textContent, 'Lote com vagas limitadas!');
     assert.equal(page.timer.attributes['aria-label'], 'Tempo até o encerramento do lote');
     assert.deepEqual(page.bonuses.filter(bonus => !bonus.hidden).map(bonus => bonus.label.textContent), expected.map((_, i) => `Bônus ${i + 1}`));
     const freshPage = load(slug, start);
