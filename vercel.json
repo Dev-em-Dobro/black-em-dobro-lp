@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
+      "src": "^/(?:index\\.html)?$",
+      "headers": { "Location": "/oferta-geral" },
+      "status": 308
+    },
+    {
       "src": "^/v1(?:/index\\.html|/)?$",
       "headers": { "Location": "/alunos-bf" },
       "status": 308
