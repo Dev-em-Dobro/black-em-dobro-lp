@@ -45,7 +45,7 @@
     progress.hidden = !end;
     timer.setAttribute('aria-label', current ? 'Tempo até o encerramento do lote' : 'Tempo até a abertura do próximo lote');
     status.textContent = current
-      ? `Lote ${current.number} com vagas limitadas!`
+      ? 'Lote com vagas limitadas!'
       : next ? `Matrículas ${next.number === 1 ? 'abrem' : 'reabrem'} em ${dateFormatter.format(new Date(next.start))}${next.number === 1 ? ', às 20h' : ''}.` : 'Lote promocional encerrado.';
 
     const remaining = end ? Math.max(0, end - now) : 0;
