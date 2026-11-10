@@ -35,7 +35,7 @@
 
 .current-lot-bonuses { display: grid; grid-template-columns: 1fr; gap: 0; }
 .current-lot-bonus { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); align-items: center; gap: 12px 32px; padding: 22px 0; }
-.current-lot-bonus:not(:first-child) { border-top: 1px solid #a5dfbd38; }
+.current-lot-bonus:not([hidden]) ~ .current-lot-bonus:not([hidden]) { border-top: 1px solid #a5dfbd38; }
 .current-lot-bonus .current-lot-label { grid-column: 1 / -1; margin-bottom: 0; }
 .current-lot-bonus .current-lot-description { margin-top: 0; }
 .current-lot-bonuses .current-lot-period { grid-column: 1 / -1; margin-top: 0; }
@@ -62,6 +62,79 @@
   color: #dce9df;
   font-size: 17px;
   line-height: 1.6;
+}
+
+.current-lot-workshop-notice {
+  display: block;
+  margin-top: 12px;
+  color: #bfd1c5;
+  font-size: 15px;
+}
+
+.current-lot-bonus--holo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0 0 20px;
+  padding: clamp(24px, 3vw, 38px);
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background:
+    linear-gradient(118deg, #153c35, #10252d 60%, #252639) padding-box,
+    linear-gradient(125deg, #fff0b9, #8af5d4 22%, #9fceff 46%, #edb7ed 70%, #fff0b9) border-box;
+  box-shadow: 0 12px 36px #020c1570, inset 0 1px 0 #ffffff36;
+}
+
+.current-lot-bonus--holo::before,
+.current-lot-bonus--holo::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.current-lot-bonus--holo::before {
+  inset: -75%;
+  background:
+    repeating-linear-gradient(118deg, #ffce7a66 0%, #5ce9b080 10%, #67c8ff80 20%, #bb8cff73 30%, #ff91bf66 40%, #ffce7a66 50%),
+    repeating-linear-gradient(36deg, transparent 0 2px, #ffffff0a 2px 3px);
+  mix-blend-mode: screen;
+  opacity: .65;
+  animation: lot-holo-foil 12s ease-in-out infinite alternate;
+}
+
+.current-lot-bonus--holo::after {
+  inset: -35%;
+  background:
+    linear-gradient(115deg, transparent 37%, #e9ffff08 43%, #e9ffff6b 49%, #ffffff99 50%, #e9ffff12 56%, transparent 63%),
+    radial-gradient(circle, #fff9 0 1px, transparent 1.5px) 0 0 / 59px 47px,
+    radial-gradient(circle, #cefff580 0 .7px, transparent 1.2px) 23px 17px / 37px 61px;
+  mix-blend-mode: screen;
+  opacity: .48;
+  transform: translate3d(-30%, 0, 0);
+  animation: lot-holo-shine 9s ease-in-out infinite;
+}
+
+.current-lot-bonus--holo > * { position: relative; z-index: 1; }
+.current-lot-bonus--holo .current-lot-label { color: #e0fff1; }
+.current-lot-bonus--holo h3 { color: #f5fff9; text-shadow: 0 2px 12px #07151de6; }
+.current-lot-bonus--holo .current-lot-description { color: #f0f9f6; text-shadow: 0 1px 8px #07151d; }
+.current-lot-bonus--holo .current-lot-workshop-notice { color: #e0eee9; }
+
+@keyframes lot-holo-foil {
+  from { transform: translate3d(-7%, -3%, 0) rotate(-6deg); }
+  to { transform: translate3d(7%, 3%, 0) rotate(6deg); }
+}
+
+@keyframes lot-holo-shine {
+  0%, 15% { transform: translate3d(-30%, 0, 0); opacity: .2; }
+  55% { opacity: .5; }
+  85%, 100% { transform: translate3d(30%, 0, 0); opacity: .2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current-lot-bonus--holo::before,
+  .current-lot-bonus--holo::after { animation: none; transform: none; }
 }
 
 .current-lot-period {
