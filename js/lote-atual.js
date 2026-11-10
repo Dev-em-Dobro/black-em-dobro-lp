@@ -6,9 +6,9 @@
   const lots = [
     { number: 1, start: '2026-11-05T20:00:00-03:00', end: '2026-11-07T00:00:00-03:00', bonuses: ['freela', 'claude', 'orion', 'acompanhamento'] },
     { number: 2, start: '2026-11-07T00:00:00-03:00', end: '2026-11-12T00:00:00-03:00', bonuses: ['freela', 'orion', 'acompanhamento'] },
-    { number: 3, start: '2026-11-12T00:00:00-03:00', end: '2026-11-19T00:00:00-03:00', bonuses: ['freela', 'orion', 'simone'] },
-    { number: 4, start: '2026-11-19T00:00:00-03:00', end: '2026-11-26T00:00:00-03:00', bonuses: ['freela', 'orion', 'sites'] },
-    { number: 5, start: '2026-11-29T00:00:00-03:00', end: '2026-12-03T00:00:00-03:00', bonuses: ['freela', 'orion', 'sites'] },
+    { number: 3, start: '2026-11-12T00:00:00-03:00', end: '2026-11-19T00:00:00-03:00', bonuses: ['sites', 'freela', 'orion'] },
+    { number: 4, start: '2026-11-19T00:00:00-03:00', end: '2026-11-27T00:00:00-03:00', bonuses: ['sites', 'freela', 'orion', 'entrevistas'] },
+    { number: 5, start: '2026-11-27T00:00:00-03:00', end: '2026-12-03T00:00:00-03:00', bonuses: ['sites', 'freela', 'orion', 'entrevistas', 'claude-mes'] },
   ].map(lot => ({ ...lot, start: Date.parse(lot.start), end: Date.parse(lot.end) }));
 
   const bonuses = section.querySelectorAll('[data-lot-bonus]');

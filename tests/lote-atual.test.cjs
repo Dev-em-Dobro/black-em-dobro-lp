@@ -50,9 +50,9 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'oferta-geral']) {
   const lots = [
     ['2026-11-05T20:00:00-03:00', '2026-11-06T23:59:59-03:00', ['freela', 'claude', 'orion', 'acompanhamento'], '6 de novembro', ['01', '04', '00', '00']],
     ['2026-11-07T00:00:00-03:00', '2026-11-11T23:59:59-03:00', ['freela', 'orion', 'acompanhamento'], '11 de novembro', ['05', '00', '00', '00']],
-    ['2026-11-12T00:00:00-03:00', '2026-11-18T23:59:59-03:00', ['freela', 'orion', 'simone'], '18 de novembro', ['07', '00', '00', '00']],
-    ['2026-11-19T00:00:00-03:00', '2026-11-25T23:59:59-03:00', ['freela', 'orion', 'sites'], '25 de novembro', ['07', '00', '00', '00']],
-    ['2026-11-29T00:00:00-03:00', '2026-12-02T23:59:59-03:00', ['freela', 'orion', 'sites'], '2 de dezembro', ['04', '00', '00', '00']],
+    ['2026-11-12T00:00:00-03:00', '2026-11-18T23:59:59-03:00', ['sites', 'freela', 'orion'], '18 de novembro', ['07', '00', '00', '00']],
+    ['2026-11-19T00:00:00-03:00', '2026-11-26T23:59:59-03:00', ['sites', 'freela', 'orion', 'entrevistas'], '26 de novembro', ['08', '00', '00', '00']],
+    ['2026-11-27T00:00:00-03:00', '2026-12-02T23:59:59-03:00', ['sites', 'freela', 'orion', 'entrevistas', 'claude-mes'], '2 de dezembro', ['06', '00', '00', '00']],
   ];
   lots.forEach(([start, lastSecond, expected, deadline, digits], index) => {
     page.at(start);
@@ -81,20 +81,18 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'oferta-geral']) {
   assert.equal(page.progress.value, 75, 'barra acompanha o prazo do lote atual');
   assert.deepEqual(page.visible(), ['freela', 'orion', 'acompanhamento']);
   page.at('2026-11-12T00:00:00-03:00', 'pageshow');
-  assert.deepEqual(page.visible(), ['freela', 'orion', 'simone'], 'atualiza ao voltar do cache de navegação');
+  assert.deepEqual(page.visible(), ['sites', 'freela', 'orion'], 'atualiza ao voltar do cache de navegação');
   page.at('2026-11-26T00:00:00-03:00');
-  assert.equal(page.section.hidden, true);
-  assert.deepEqual(page.visible(), []);
-  assert.equal(page.period.textContent, '');
-  assert.match(page.status.textContent, /reabrem em 29 de novembro/);
-  assert.deepEqual(page.digits(), ['03', '00', '00', '00']);
-  assert.equal(page.timer.attributes['aria-label'], 'Tempo até a abertura do próximo lote');
-  page.at('2026-11-28T23:59:59-03:00');
-  assert.equal(page.section.hidden, true);
+  assert.equal(page.section.hidden, false, 'o período de 19 a 26 inclui o dia 26 inteiro');
+  assert.deepEqual(page.visible(), ['sites', 'freela', 'orion', 'entrevistas']);
+  assert.deepEqual(page.digits(), ['01', '00', '00', '00']);
+  page.at('2026-11-26T23:59:59-03:00');
+  assert.equal(page.section.hidden, false);
+  assert.equal(page.visible().includes('claude-mes'), false, 'sorteio de um mês só na reabertura');
   assert.deepEqual(page.digits(), ['00', '00', '00', '01']);
-  page.at('2026-11-29T00:00:00-03:00');
-  assert.deepEqual(page.visible(), ['freela', 'orion', 'sites']);
-  assert.deepEqual(page.digits(), ['04', '00', '00', '00']);
+  page.at('2026-11-27T00:00:00-03:00');
+  assert.deepEqual(page.visible(), ['sites', 'freela', 'orion', 'entrevistas', 'claude-mes']);
+  assert.deepEqual(page.digits(), ['06', '00', '00', '00']);
   page.at('2026-12-03T00:00:00-03:00');
   assert.equal(page.section.hidden, true);
   assert.equal(page.timer.hidden, true);
@@ -106,4 +104,4 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'oferta-geral']) {
   assert.equal(page.timer.hidden, true, 'não reinicia após o encerramento final');
 }
 vm.runInNewContext(script, { document: { querySelector: () => null } });
-console.log('Três páginas: cinco lotes, viradas em Brasília, bônus, contador, pausa, reabertura e encerramento em 02/12: OK');
+console.log('Três páginas: bônus atualizados, viradas em Brasília, contador, reabertura em 27/11 e encerramento em 02/12: OK');
