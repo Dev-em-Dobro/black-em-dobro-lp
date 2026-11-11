@@ -10,7 +10,7 @@ assert.match(html, /<link rel="canonical" href="https:\/\/blackinfinita\.devemdo
 assert.match(html, /A <span class="hl">maior condição<\/span> da história da Dev em Dobro está ainda melhor para alunos!<\/h1>/);
 assert.doesNotMatch(html, /offer-card-price|ecosystem-final-value|Preço final|R\$ 797|Quero garantir|Asimov/);
 assert.doesNotMatch(html, /class="card signup-card offer-card hero-form"/);
-assert.equal((html.match(/Sua condição de aluno/g) || []).length, 2);
+assert.equal((html.match(/Sua condição de aluno/g) || []).length, 3); // 2 cards de oferta + modal
 assert.equal(html.split(condition).length - 1, 2);
 assert.equal((html.match(/data-checkout/g) || []).length, 10);
 assert.equal((html.match(/>Quero minha condição de aluno<\/a>/g) || []).length, 10);
@@ -28,6 +28,15 @@ assert.match(html, /<link rel="stylesheet" href="\/css\/hero-zoom\.css\?v=4">/);
 assert.match(html, /<\/div>\s*<progress class="offer-lot-progress"[^>]*><\/progress>\s*<\/div>/, 'barra de progresso abaixo do contador');
 assert.ok(html.indexOf('/js/barra-flutuante.js') < html.indexOf('/js/hero-zoom.js'), 'barra escuta o zoom antes dele emitir');
 
+// Modal da condição de aluno: e-mail -> /api/aluno -> checkout ou /oferta-geral
+assert.match(html, /<dialog class="ma-modal" data-ma-modal aria-labelledby="ma-title">/);
+assert.match(html, /<form class="ma-form" data-ma-form novalidate>[\s\S]*?type="email"[\s\S]*?>Ver minha condição de aluno<\/button>/);
+assert.match(html, /data-ma-step="nao-aluno" hidden>[\s\S]*?Matrícula não encontrada[\s\S]*?href="\/oferta-geral" target="_blank" rel="noopener">Ver a condição da Black Friday</);
+assert.match(html, /<link rel="stylesheet" href="\/css\/modal-aluno\.css\?v=1">/);
+assert.match(html, /<script src="\/js\/modal-aluno\.js\?v=1" defer><\/script>/);
+const modalJs = fs.readFileSync(path.join(__dirname, '../js/modal-aluno.js'), 'utf8');
+assert.match(modalJs, /fetch\('\/api\/aluno'/);
+assert.match(modalJs, /a\[data-checkout\], #cta-barra-flutuante/);
 
 // Todos os botões (10 do checkout + barra flutuante) abrem em nova aba
 const buttons = html.match(/<a class="[^"]*"[^>]*(?:data-checkout|id="cta-barra-flutuante")[^>]*>/g) || [];

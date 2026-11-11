@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/css/lote-atual.css?v=bonus-novembro-2026">
   <link rel="stylesheet" href="/css/barra-flutuante.css?v=2">
   <link rel="stylesheet" href="/css/hero-zoom.css?v=4">
+  <link rel="stylesheet" href="/css/modal-aluno.css?v=1">
 </head>
 <body class="v3 oferta">
   <!-- Google Tag Manager (noscript) -->
@@ -582,6 +583,40 @@
     <a class="hz-bar-cta" id="cta-barra-flutuante" href="https://pay.hub.la/NZKc6aZXwbD4ihw9vvPN" target="_blank" rel="noopener">Quero minha condição de aluno<span class="hz-bar-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </aside>
 
+  <!-- Modal da condição de aluno: confere o e-mail em /api/aluno antes do checkout (css/modal-aluno.css, js/modal-aluno.js) -->
+  <dialog class="ma-modal" data-ma-modal aria-labelledby="ma-title">
+    <div class="ma-card">
+      <button class="ma-close" type="button" aria-label="Fechar" data-ma-close>&times;</button>
+      <span class="ma-mark" aria-hidden="true"><svg viewBox="-2 4 64 32" fill="none"><path d="M30 20L20 10Q14 4 8 10L4 14Q-2 20 4 26L8 30Q14 36 20 30L40 10Q46 4 52 10L56 14Q62 20 56 26L52 30Q46 36 40 30Z" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+
+      <div class="ma-step" data-ma-step="email">
+        <h2 class="ma-title" id="ma-title"><span class="hl">Condição de aluno:</span> falta só o seu e-mail</h2>
+        <p class="ma-text">Coloque o e-mail da sua compra na Dev em Dobro. Vamos conferir a sua matrícula e abrir o checkout com a sua condição de aluno.</p>
+        <form class="ma-form" data-ma-form novalidate>
+          <label class="ma-label" for="ma-email">E-mail</label>
+          <input class="ma-input" id="ma-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="voce@email.com" maxlength="120" required>
+          <p class="ma-error" data-ma-error role="alert" hidden></p>
+          <button class="btn btn-primary btn-lg btn-block ma-submit" type="submit" data-ma-submit>Ver minha condição de aluno</button>
+        </form>
+        <p class="ma-safe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Seus dados estão protegidos. Não enviamos spam.</p>
+      </div>
+
+      <div class="ma-step" data-ma-step="aluno" hidden>
+        <h2 class="ma-title">Matrícula encontrada!</h2>
+        <p class="ma-text">Sua condição de aluno está liberada. Clique no botão para abrir o checkout.</p>
+        <a class="btn btn-primary btn-lg btn-block ma-action" data-ma-checkout href="#" target="_blank" rel="noopener">Abrir meu checkout</a>
+      </div>
+
+      <div class="ma-step" data-ma-step="nao-aluno" hidden>
+        <h2 class="ma-title">Matrícula não encontrada</h2>
+        <p class="ma-text">Não achamos matrícula ativa para <strong data-ma-email></strong>.</p>
+        <p class="ma-text">Já é aluno? Tente novamente com o e-mail da compra.</p>
+        <p class="ma-text">Ainda não é? A Black também tem uma condição para você.</p>
+        <a class="btn btn-primary btn-lg btn-block ma-action" data-ma-geral href="/oferta-geral" target="_blank" rel="noopener">Ver a condição da Black Friday</a>
+        <button class="ma-link" type="button" data-ma-retry>Tentar outro e-mail</button>
+      </div>
+    </div>
+  </dialog>
 
   <script src="/v2/js/main.js?v=utm" defer></script>
   <script src="/v3/js/hero-motion.js" type="module"></script>
@@ -592,5 +627,6 @@
   <script src="/js/lote-atual.js?v=bonus-novembro-2026" defer></script>
   <script src="/js/barra-flutuante.js?v=2" defer></script>
   <script src="/js/hero-zoom.js?v=2" defer></script>
+  <script src="/js/modal-aluno.js?v=1" defer></script>
 </body>
 </html>

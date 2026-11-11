@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Modal da condição de aluno (prefixo ma-)
+   <dialog> nativo: foco preso, Esc fecha e fica acima da barra flutuante.
+   Cores do site: fundo escuro, borda e brilho verde-água, botão .btn-primary.
+   ========================================================================== */
+.ma-modal {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: transparent;
+  color: #fff;
+  overflow: visible;
+}
+.ma-modal::backdrop { background: rgba(0, 0, 0, .74); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.ma-modal[open] { animation: ma-in .35s cubic-bezier(.2, .8, .2, 1); }
+@keyframes ma-in { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+
+/* Página não rola por trás do modal */
+html:has(.ma-modal[open]) { overflow: hidden; }
+
+.ma-card {
+  position: relative;
+  max-height: calc(100dvh - 32px);
+  padding: 40px 40px 32px;
+  overflow: auto;
+  border-radius: 28px;
+  background:
+    radial-gradient(60% 34% at 50% 0, rgba(45, 212, 191, .2), transparent 72%),
+    linear-gradient(180deg, #0c1715 0%, #080b0b 100%);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, .26) inset, 0 30px 80px rgba(0, 0, 0, .6);
+  text-align: center;
+}
+
+.ma-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .04);
+  color: #d6efea;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.ma-close:hover { background: rgba(255, 255, 255, .1); }
+.ma-close:focus-visible, .ma-link:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 3px; }
+
+/* Símbolo do infinito da marca */
+.ma-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border: 1px solid rgba(45, 212, 191, .4);
+  border-radius: 18px;
+  background: #061512;
+  color: #2dd4bf;
+  box-shadow: 0 0 32px rgba(45, 212, 191, .3);
+}
+.ma-mark svg { width: 40px; height: auto; }
+
+.ma-step[hidden] { display: none; }
+.ma-title { margin: 0 0 14px; font-size: clamp(24px, 3.4vw, 32px); line-height: 1.15; }
+.ma-title .hl { display: block; color: #2dd4bf; }
+.ma-text { max-width: 30em; margin: 0 auto 10px; color: rgba(237, 237, 237, .74); font-size: 16px; line-height: 1.5; }
+.ma-text strong { color: #fff; overflow-wrap: anywhere; }
+
+/* Formulário */
+.ma-form { margin-top: 28px; text-align: left; }
+.ma-label { display: block; margin-bottom: 8px; font-size: 15px; font-weight: 700; }
+.ma-input {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 18px;
+  border: 1px solid rgba(45, 212, 191, .35);
+  border-radius: 14px;
+  background: #111816;
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+}
+.ma-input::placeholder { color: rgba(237, 237, 237, .4); }
+.ma-input:focus { border-color: #2dd4bf; outline: none; box-shadow: 0 0 0 3px rgba(45, 212, 191, .2); }
+.ma-input[aria-invalid="true"] { border-color: #f87171; }
+.ma-error { margin: 8px 0 0; color: #fca5a5; font-size: 14px; line-height: 1.4; }
+.ma-error a { color: #fff; }
+.ma-submit { margin-top: 24px; }
+.ma-submit[aria-busy="true"] { opacity: .7; cursor: progress; }
+.ma-action { margin-top: 18px; }
+
+.ma-safe { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 16px 0 0; color: rgba(237, 237, 237, .55); font-size: 14px; }
+.ma-safe svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+.ma-link {
+  margin-top: 18px;
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: #d6efea;
+  font: inherit;
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .ma-card { padding: 32px 20px 24px; }
+  .ma-close { top: 12px; right: 12px; }
+  .ma-mark { width: 56px; height: 56px; margin-bottom: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ma-modal[open] { animation: none; }
+}
