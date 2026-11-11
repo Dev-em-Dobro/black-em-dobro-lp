@@ -2,6 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
+      "src": "^/api/_",
+      "status": 404
+    },
+    {
       "src": "^/(?:index\\.html)?$",
       "headers": { "Location": "/oferta-geral" },
       "status": 308
