@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Barra flutuante com contador + CTA (prefixo hz-)
+   Cores herdadas do site: fundo escuro com borda verde-água (como os cards
+   de oferta) e botão igual ao .btn-primary (gradiente #2DD4BF → #0D9488).
+   ========================================================================== */
+:root {
+  --hz-accent: #2dd4bf;
+  --hz-accent-2: #0d9488;
+  --hz-bar-bg: linear-gradient(110deg, #0b1d19 0%, #12352c 55%, #0b1d19 100%);
+  --hz-bar-ink: #fff;
+  --hz-btn-bg: linear-gradient(110deg, #2dd4bf 0%, #14b8a6 56%, #0d9488 100%);
+  --hz-btn-bg-hover: linear-gradient(110deg, #14b8a6 0%, #0d9488 100%);
+  --hz-btn-ink: #06211e;
+  --hz-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Contêiner: pílula fixa, centralizada, escondida por padrão ------------- */
+.hz-bar {
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  width: min(1100px, calc(100% - 32px));
+  padding: 10px 10px 10px 36px;
+  border-radius: 999px;
+  background: var(--hz-bar-bg);
+  color: var(--hz-bar-ink);
+  box-shadow: 0 18px 40px #0000008c, 0 0 32px #2dd4bf26, 0 0 0 1px #2dd4bf66 inset;
+  opacity: 0;
+  transform: translate(-50%, calc(100% + 40px));
+  transition: transform .5s var(--hz-ease), opacity .5s var(--hz-ease);
+  pointer-events: none;
+}
+.hz-bar.is-visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+
+/* Texto da esquerda ------------------------------------------------------ */
+.hz-bar-label { margin: 0; font-size: clamp(16px, 1.6vw, 20px); font-weight: 700; line-height: 1.2; }
+
+/* Contador: mesmos valores do contador do hero --------------------------- */
+.hz-bar-timer { display: flex; align-items: flex-start; gap: 4px; }
+.hz-bar-timer[hidden] { display: none; }
+.hz-bar-unit { display: grid; justify-items: center; min-width: 52px; }
+.hz-bar-unit strong {
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+}
+.hz-bar-unit span { color: #b7e8df; font-size: 12px; font-weight: 500; line-height: 1.3; text-transform: lowercase; }
+.hz-bar-sep { padding-top: 4px; color: var(--hz-accent); font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; }
+
+/* Botão no padrão do .btn-primary do site, com círculo escuro e seta ----- */
+.hz-bar-cta {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+  padding: 6px 6px 6px 28px;
+  border-radius: 999px;
+  background: var(--hz-btn-bg);
+  color: var(--hz-btn-ink);
+  font-family: var(--font-titulo);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: capitalize;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .24), 0 8px 24px rgba(20, 184, 166, .14);
+  transition: transform .2s var(--hz-ease), box-shadow .2s var(--hz-ease);
+}
+.hz-bar-cta:hover {
+  background: var(--hz-btn-bg-hover);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .2), 0 10px 28px rgba(20, 184, 166, .22);
+  transform: translateY(-1px);
+}
+.hz-bar-cta:focus-visible { outline: 2px solid var(--hz-accent); outline-offset: 3px; }
+.hz-bar-arrow {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--hz-btn-ink);
+  color: var(--hz-accent);
+}
+.hz-bar-arrow svg { width: 18px; height: 18px; }
+
+/* WhatsApp sobe enquanto a barra está visível ---------------------------- */
+.whatsapp-float { transition: bottom .5s var(--hz-ease); }
+body.hz-bar-on .whatsapp-float { bottom: 110px; }
+body.hz-bar-on .v3-footer { padding-bottom: 150px; }
+
+/* Tablet/mobile: barra compacta ----------------------------------------- */
+@media (max-width: 760px) {
+  .hz-bar { bottom: 12px; gap: 10px; width: calc(100% - 24px); padding: 6px 6px 6px 18px; }
+  .hz-bar-label { display: none; }
+  .hz-bar-unit { min-width: 30px; }
+  .hz-bar-unit strong { font-size: 20px; }
+  .hz-bar-unit span { font-size: 10px; }
+  .hz-bar-sep { padding-top: 1px; font-size: 18px; }
+  .hz-bar-cta { gap: 8px; min-height: 48px; max-width: 54%; padding: 4px 4px 4px 14px; font-size: 13px; }
+  .hz-bar-arrow { width: 38px; height: 38px; }
+  .hz-bar-arrow svg { width: 15px; height: 15px; }
+  body.hz-bar-on .whatsapp-float { bottom: 84px; }
+}
+
+/* Sem animação para quem pediu movimento reduzido ------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .hz-bar, .hz-bar-cta, .whatsapp-float { transition: none; }
+}
