@@ -30,7 +30,7 @@ for (const pathname of ['/v2/index', '/v4', '/v4/', '/v10', '/v3/cards-preview.h
   assert.equal(route.headers.Location, '/', pathname);
 }
 
-for (const pathname of ['/', '/index.html', '/obrigado', '/obrigado/', '/privacidade.html', '/cookies.html', '/api/subscribe', '/alunos-bf', '/alunos-bf/', '/alunos-dq', '/oferta-geral', '/v2/css/style.css', '/v2/js/main.js', '/v3/css/ecosystem.css', '/v3/js/course-gallery.js', '/v3/assets/fundadores.png']) {
+for (const pathname of ['/', '/index.html', '/obrigado', '/obrigado/', '/privacidade.html', '/cookies.html', '/api/subscribe', '/alunos-bf', '/alunos-bf/', '/alunos-dq', '/alunos-geral', '/oferta-geral', '/v2/css/style.css', '/v2/js/main.js', '/v3/css/ecosystem.css', '/v3/js/course-gallery.js', '/v3/assets/fundadores.png']) {
   assert.equal(redirect(pathname), undefined, pathname);
 }
 
@@ -43,9 +43,10 @@ assert.equal(fs.existsSync(path.join(root, 'v2/index.html')), false);
 assert.equal(fs.existsSync(path.join(root, 'v3/index.html')), false);
 assert.equal(fs.existsSync(path.join(root, 'alunos-bf/index.html')), true);
 assert.equal(fs.existsSync(path.join(root, 'alunos-dq/index.html')), true);
+assert.equal(fs.existsSync(path.join(root, 'alunos-geral/index.html')), true);
 assert.equal(fs.existsSync(path.join(root, 'oferta-geral/index.html')), true);
 
-for (const filename of ['index.html', 'obrigado/index.html', 'privacidade.html', 'cookies.html', 'alunos-bf/index.html', 'alunos-dq/index.html', 'oferta-geral/index.html']) {
+for (const filename of ['index.html', 'obrigado/index.html', 'privacidade.html', 'cookies.html', 'alunos-bf/index.html', 'alunos-dq/index.html', 'alunos-geral/index.html', 'oferta-geral/index.html']) {
   const source = fs.readFileSync(path.join(root, filename), 'utf8');
   assert.doesNotMatch(source, /href="\/v\d+\/#/);
   for (const [, resource] of source.matchAll(/(?:src|href)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)) {

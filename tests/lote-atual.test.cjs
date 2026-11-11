@@ -40,7 +40,7 @@ function load(slug, instant) {
   };
 }
 
-for (const slug of ['alunos-bf', 'alunos-dq', 'oferta-geral']) {
+for (const slug of ['alunos-bf', 'alunos-dq', 'alunos-geral', 'oferta-geral']) {
   const page = load(slug, '2026-11-05T19:59:59-03:00');
   assert.equal(page.section.hidden, true);
   assert.deepEqual(page.visible(), []);
