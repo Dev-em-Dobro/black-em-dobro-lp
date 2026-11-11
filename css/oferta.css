@@ -107,6 +107,10 @@
 }
 .offer-card-cash-price { margin: 0; color: #b7e8df; font-size: 16px; line-height: 1.4; }
 .offer-card .hero-form-note { margin: 0; }
+.offer-card-title { margin: 0; color: #fff; font-size: clamp(26px, 3vw, 34px); line-height: 1.15; }
+.offer-card .offer-card-title + .hero-form-note { font-size: 16px; line-height: 1.5; }
+.hero-cta { margin-top: 24px; }
+@media (max-width: 560px) { .hero-cta { width: 100%; } }
 
 .ecosystem-final {
   display: flex;
