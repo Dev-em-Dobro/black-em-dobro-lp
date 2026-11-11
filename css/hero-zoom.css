@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Zoom do hero ao rolar, com o banner em cima (prefixo hz-)
+
+   Estrutura (alunos-geral/index.html):
+     .hz-zoom[data-hz-zoom]     wrapper alto (altura do hero + 120vh, via JS)
+       section.hero.hz-hero     container sticky; recebe --p (0 a 1)
+         .hz-overlay            camada preta que escurece o resto do hero
+         figure.hero-banner     cresce até o centro da tela (só transform)
+         h1.hero-title          sobe e fica sobreposto ao banner
+         texto, CTA e contador  vão sumindo
+
+   Medidas (--hz-dx, --hz-dy, --hz-s, --hz-ty) vêm do js/hero-zoom.js.
+   Mobile (até 900px) e prefers-reduced-motion: hero normal, sem efeito.
+   ========================================================================== */
+.hz-overlay { display: none; }
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .hz-zoom { margin-top: calc(-1 * var(--topbar)); }
+  .hz-zoom > .hz-hero { position: sticky; margin-top: 0; }
+
+  /* Camada preta: acima do texto/contador, abaixo do banner e do título */
+  .hz-overlay {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    background: #000;
+    opacity: calc(var(--p, 0) * .8);
+    pointer-events: none;
+  }
+
+  /* Sem contexto de empilhamento no .hero-split, para o título poder
+     ficar acima do banner enquanto o resto fica abaixo da camada preta */
+  .hz-hero .hero-split { z-index: auto; }
+
+  /* Banner: posição original + (deslocamento até o centro × progresso) */
+  .hz-hero .hero-banner {
+    z-index: 3;
+    transform-origin: center;
+    transform:
+      translate(calc(var(--hz-dx, 0) * var(--p, 0) * 1px), calc(var(--hz-dy, 0) * var(--p, 0) * 1px))
+      scale(calc(1 + (var(--hz-s, 1) - 1) * var(--p, 0)));
+    will-change: transform;
+  }
+
+  /* Escurece a base do banner conforme amplia, para o título ficar legível
+     (mantém o leve tom que o .v3 já aplica nesse ::before) */
+  .v3 .hz-hero .hero-banner::before {
+    background:
+      linear-gradient(transparent 45%, rgba(0, 0, 0, calc(var(--p, 0) * .7)) 100%),
+      rgba(7, 14, 20, .08);
+  }
+
+  /* Título: desce até a parte de baixo do banner ampliado */
+  .hz-hero .hero-title {
+    position: relative;
+    z-index: 5;
+    transform: translateY(calc(var(--hz-ty, 0) * var(--p, 0) * 1px));
+    text-shadow: 0 2px 24px rgba(0, 0, 0, calc(var(--p, 0) * .9));
+    will-change: transform;
+  }
+
+  /* A animação de entrada (.v3 .enter) tem transition em transform:
+     aqui o transform segue a rolagem, então só mantém opacity/translate */
+  .hz-hero .hero-banner,
+  .hz-hero .hero-title { transition-property: opacity, translate; }
+
+  /* O resto do hero vai sumindo. Usa filter porque a animação de entrada
+     (.v3 .enter.is-in) fixa opacity: 1 nesses elementos */
+  .hz-hero .hero-lead,
+  .hz-hero .hero-cta,
+  .hz-hero .offer-lot { filter: opacity(max(0, 1 - var(--p, 0) * 2.2)); }
+
+  /* Depois da metade do zoom, o que está sumindo não recebe clique */
+  .hz-hero.hz-faded .hero-lead,
+  .hz-hero.hz-faded .hero-cta,
+  .hz-hero.hz-faded .offer-lot { pointer-events: none; }
+}
