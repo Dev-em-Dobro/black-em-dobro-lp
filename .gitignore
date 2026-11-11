@@ -4,3 +4,8 @@
 node_modules
 .DS_Store
 *.log
+
+# Planilhas com dados de alunos (nunca versionar)
+*.xlsx
+*.xls
+*.csv
