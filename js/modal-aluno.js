@@ -6,7 +6,8 @@
    - O e-mail é conferido em POST /api/aluno (só responde aluno: true/false).
    - Aluno: abre o checkout do botão clicado (com UTMs) em nova aba. Se o
      navegador bloquear a aba, mostra um botão para abrir.
-   - Não aluno: mostra "Matrícula não encontrada" com o link da /oferta-geral.
+   - Não aluno: mostra "Matrícula não encontrada" com o botão do checkout
+     da Black Friday (href no HTML, com as UTMs da página).
    - Se a conferência falhar, deixa seguir para o checkout (não perde a venda).
    - Eventos no dataLayer (sem e-mail): event "condicao_aluno".
    ========================================================================== */
@@ -21,11 +22,21 @@
   const error = modal.querySelector('[data-ma-error]');
   const steps = modal.querySelectorAll('[data-ma-step]');
   const checkoutLink = modal.querySelector('[data-ma-checkout]');
-  const geralLink = modal.querySelector('[data-ma-geral]');
+  const blackLink = modal.querySelector('[data-ma-black]');
+  const blackCheckout = blackLink.getAttribute('href');
   const emailOut = modal.querySelector('[data-ma-email]');
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   let checkoutUrl = '';
   let busy = false;
+
+  // Copia as UTMs da página para o link (como o js/oferta.js faz nos botões)
+  function withUtms(href) {
+    const url = new URL(href, window.location.href);
+    new URLSearchParams(window.location.search).forEach((value, key) => {
+      if (key.startsWith('utm_')) url.searchParams.set(key, value);
+    });
+    return url.toString();
+  }
 
   const track = resultado => {
     window.dataLayer = window.dataLayer || [];
@@ -106,9 +117,9 @@
       } else {
         track('nao_aluno');
         emailOut.textContent = email;
-        geralLink.href = `/oferta-geral${window.location.search}`;
+        blackLink.href = withUtms(blackCheckout);
         showStep('nao-aluno');
-        geralLink.focus();
+        blackLink.focus();
       }
     } catch {
       track('erro');

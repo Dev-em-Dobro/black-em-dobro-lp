@@ -28,12 +28,12 @@ assert.match(html, /<link rel="stylesheet" href="\/css\/hero-zoom\.css\?v=4">/);
 assert.match(html, /<\/div>\s*<progress class="offer-lot-progress"[^>]*><\/progress>\s*<\/div>/, 'barra de progresso abaixo do contador');
 assert.ok(html.indexOf('/js/barra-flutuante.js') < html.indexOf('/js/hero-zoom.js'), 'barra escuta o zoom antes dele emitir');
 
-// Modal da condição de aluno: e-mail -> /api/aluno -> checkout ou /oferta-geral
+// Modal da condição de aluno: e-mail -> /api/aluno -> checkout de aluno ou checkout da Black
 assert.match(html, /<dialog class="ma-modal" data-ma-modal aria-labelledby="ma-title">/);
 assert.match(html, /<form class="ma-form" data-ma-form novalidate>[\s\S]*?type="email"[\s\S]*?>Ver minha condição de aluno<\/button>/);
-assert.match(html, /data-ma-step="nao-aluno" hidden>[\s\S]*?Matrícula não encontrada[\s\S]*?href="\/oferta-geral" target="_blank" rel="noopener">Ver a condição da Black Friday</);
+assert.match(html, /data-ma-step="nao-aluno" hidden>[\s\S]*?Matrícula não encontrada[\s\S]*?data-ma-black href="https:\/\/pay\.hub\.la\/6njIGlJgossHQysj6WA7" target="_blank" rel="noopener">Ver a condição da Black Friday</);
 assert.match(html, /<link rel="stylesheet" href="\/css\/modal-aluno\.css\?v=1">/);
-assert.match(html, /<script src="\/js\/modal-aluno\.js\?v=1" defer><\/script>/);
+assert.match(html, /<script src="\/js\/modal-aluno\.js\?v=2" defer><\/script>/);
 const modalJs = fs.readFileSync(path.join(__dirname, '../js/modal-aluno.js'), 'utf8');
 assert.match(modalJs, /fetch\('\/api\/aluno'/);
 assert.match(modalJs, /a\[data-checkout\], #cta-barra-flutuante/);
