@@ -7,6 +7,8 @@ const { routes } = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'u
 const redirect = pathname => routes.find(route => new RegExp(route.src).test(pathname));
 
 const salesRedirects = {
+  '/': '/oferta-geral',
+  '/index.html': '/oferta-geral',
   '/v1': '/alunos-bf',
   '/v1/': '/alunos-bf',
   '/v1/index.html': '/alunos-bf',
@@ -28,12 +30,6 @@ for (const pathname of ['/v2/index', '/v4', '/v4/', '/v10', '/v3/cards-preview.h
   const route = redirect(pathname);
   assert.equal(route?.status, 308, pathname);
   assert.equal(route.headers.Location, '/', pathname);
-}
-
-// A raiz leva para a oferta geral
-for (const pathname of ['/', '/index.html']) {
-  assert.equal(redirect(pathname)?.status, 308, pathname);
-  assert.equal(redirect(pathname).headers.Location, '/oferta-geral', pathname);
 }
 
 for (const pathname of ['/obrigado', '/obrigado/', '/privacidade.html', '/cookies.html', '/api/subscribe', '/api/aluno', '/alunos-bf', '/alunos-bf/', '/alunos-dq', '/alunos-geral', '/oferta-geral', '/v2/css/style.css', '/v2/js/main.js', '/v3/css/ecosystem.css', '/v3/js/course-gallery.js', '/v3/assets/fundadores.png']) {

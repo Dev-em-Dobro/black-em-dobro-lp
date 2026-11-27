@@ -12,8 +12,10 @@ assert.doesNotMatch(html, /offer-card-price|ecosystem-final-value|Preço final|R
 assert.doesNotMatch(html, /class="card signup-card offer-card hero-form"/);
 assert.equal((html.match(/Sua condição de aluno/g) || []).length, 3); // 2 cards de oferta + modal
 assert.equal(html.split(condition).length - 1, 2);
-assert.equal((html.match(/data-checkout/g) || []).length, 10);
+assert.equal((html.match(/data-checkout/g) || []).length, 20);
 assert.equal((html.match(/>Quero minha condição de aluno<\/a>/g) || []).length, 10);
+assert.equal((html.match(/data-boleto/g) || []).length, 10);
+assert.equal((html.split('href="https://pay.tmb.com.br/DevemDobro/ZBS345545R7"').length - 1), 10);
 assert.equal((html.match(/<section\b/g) || []).length, (base.match(/<section\b/g) || []).length);
 assert.match(html, /<p class="offer-ribbon">Condição Exclusiva para alunos por tempo limitado!<\/p>/);
 assert.match(html, /data-offer-period hidden/);
@@ -38,9 +40,9 @@ const modalJs = fs.readFileSync(path.join(__dirname, '../js/modal-aluno.js'), 'u
 assert.match(modalJs, /fetch\('\/api\/aluno'/);
 assert.match(modalJs, /a\[data-checkout\], #cta-barra-flutuante/);
 
-// Todos os botões (10 do checkout + barra flutuante) abrem em nova aba
+// Todos os botões (10 do checkout, 10 do boleto e barra flutuante) abrem em nova aba
 const buttons = html.match(/<a class="[^"]*"[^>]*(?:data-checkout|id="cta-barra-flutuante")[^>]*>/g) || [];
-assert.equal(buttons.length, 11);
-buttons.forEach(tag => assert.match(tag, / target="_blank" rel="noopener"/, tag));
+assert.equal(buttons.length, 21);
+buttons.forEach(tag => assert.match(tag, / target="_blank" rel="noopener(?: noreferrer)?"/, tag));
 
 console.log('alunos-geral sem preço, com condição de aluno e CTA próprio: OK');

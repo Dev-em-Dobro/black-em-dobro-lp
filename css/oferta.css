@@ -111,6 +111,10 @@
 .offer-card .offer-card-title + .hero-form-note { font-size: 16px; line-height: 1.5; }
 .hero-cta { margin-top: 24px; }
 @media (max-width: 560px) { .hero-cta { width: 100%; } }
+.btn-boleto { border-color: #8be4d5; color: #e4fff9; }
+.btn-boleto:hover { border-color: #2dd4bf; background: #2dd4bf1a; }
+.hero-copy > .hero-cta + .btn-boleto { margin-top: 12px; }
+@media (max-width: 560px) { .hero-copy > .hero-cta + .btn-boleto { width: 100%; } }
 
 .ecosystem-final {
   display: flex;
@@ -156,8 +160,9 @@
 }
 
 .offer-cta { margin-top: 36px; }
-.offer-cta--center { display: flex; justify-content: center; }
+.offer-cta--center { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .offer-cta .btn { min-width: min(100%, 340px); text-align: center; }
+.ecosystem-action .btn + .btn { margin-top: 12px; }
 
 @media (min-width: 861px) {
   body.oferta .hero .offer-card { margin-right: 72px; }

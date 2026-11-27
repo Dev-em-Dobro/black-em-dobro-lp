@@ -40,8 +40,10 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.doesNotMatch(html, /data-start=|data-end=/, slug);
   assert.ok(html.indexOf('class="card signup-card offer-card hero-form"') < html.indexOf('data-offer-period'), slug);
   assert.doesNotMatch(html, /topbar-cta/);
-  assert.equal((html.match(/data-checkout/g) || []).length, 10, slug);
+  assert.equal((html.match(/data-checkout/g) || []).length, 20, slug);
   assert.equal((html.split(checkout).length - 1), 10, slug);
+  assert.equal((html.match(/data-boleto/g) || []).length, 10, slug);
+  assert.equal((html.split('href="https://pay.tmb.com.br/DevemDobro/ZBS345545R7"').length - 1), 10, slug);
   assert.match(html, new RegExp(`class="ecosystem-final-value">R\\$ ${price}<span>,00</span>`));
   assert.equal(html.includes('Condição Exclusiva para alunos por tempo limitado!'), ribbon, slug);
   if (ribbon) assert.ok(html.indexOf('offer-ribbon') < html.indexOf('hero-banner'), slug);
