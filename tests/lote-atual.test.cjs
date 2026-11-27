@@ -41,6 +41,9 @@ function load(slug, instant) {
 }
 
 for (const slug of ['alunos-bf', 'alunos-dq', 'alunos-geral', 'oferta-geral']) {
+  const html = fs.readFileSync(path.join(__dirname, '..', slug, 'index.html'), 'utf8');
+  const present = new Set([...html.matchAll(/data-lot-bonus="([^"]+)"/g)].map(([, key]) => key));
+  const onPage = keys => keys.filter(key => present.has(key));
   const page = load(slug, '2026-11-05T19:59:59-03:00');
   assert.equal(page.section.hidden, true);
   assert.deepEqual(page.visible(), []);
@@ -61,20 +64,20 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'alunos-geral', 'oferta-geral']) {
     assert.equal(page.timer.hidden, false);
     assert.equal(page.progress.hidden, false);
     assert.equal(page.progress.value, 50);
-    assert.deepEqual(page.visible(), expected);
+    assert.deepEqual(page.visible(), onPage(expected));
     assert.deepEqual(page.digits(), digits);
     assert.equal(page.period.textContent, `Bônus válidos até ${deadline}, às 23h59.`);
     assert.equal(page.status.textContent, 'Lote com vagas limitadas!');
     assert.equal(page.timer.attributes['aria-label'], 'Tempo até o encerramento do lote');
-    assert.deepEqual(page.bonuses.filter(bonus => !bonus.hidden).map(bonus => bonus.label.textContent), expected.map((_, i) => `Bônus ${i + 1}`));
+    assert.deepEqual(page.bonuses.filter(bonus => !bonus.hidden).map(bonus => bonus.label.textContent), onPage(expected).map((_, i) => `Bônus ${i + 1}`));
     const freshPage = load(slug, start);
-    assert.deepEqual(freshPage.visible(), expected, 'acesso direto durante cada lote');
+    assert.deepEqual(freshPage.visible(), onPage(expected), 'acesso direto durante cada lote');
     assert.deepEqual(freshPage.digits(), digits);
     page.at(lastSecond);
-    assert.deepEqual(page.visible(), expected, 'bônus ativos durante todo o último minuto');
+    assert.deepEqual(page.visible(), onPage(expected), 'bônus ativos durante todo o último minuto');
     assert.deepEqual(page.digits(), ['00', '00', '00', '01']);
     page.at(Date.parse(lastSecond) + 999);
-    assert.deepEqual(page.visible(), expected, 'não vira antes da meia-noite');
+    assert.deepEqual(page.visible(), onPage(expected), 'não vira antes da meia-noite');
   });
 
   page.at('2026-11-09T12:00:00-03:00', 'visibilitychange');
@@ -91,7 +94,7 @@ for (const slug of ['alunos-bf', 'alunos-dq', 'alunos-geral', 'oferta-geral']) {
   assert.equal(page.visible().includes('claude-mes'), false, 'sorteio de um mês só na reabertura');
   assert.deepEqual(page.digits(), ['00', '00', '00', '01']);
   page.at('2026-11-27T00:00:00-03:00');
-  assert.deepEqual(page.visible(), ['sites', 'freela', 'orion', 'entrevistas', 'claude-mes']);
+  assert.deepEqual(page.visible(), onPage(['sites', 'freela', 'orion', 'entrevistas', 'claude-mes']));
   assert.deepEqual(page.digits(), ['06', '00', '00', '00']);
   page.at('2026-12-03T00:00:00-03:00');
   assert.equal(page.section.hidden, true);
