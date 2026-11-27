@@ -17,9 +17,12 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.match(html, /<section class="v3-section current-lot"[^>]*>/, slug);
   assert.match(html, /<script src="\/js\/lote-atual\.js\?v=bonus-novembro-2026" defer><\/script>/, slug);
   assert.doesNotMatch(html, /id="desafio-primeiro-freela"|id="conteudo-live"|\/js\/prazo-oferta\.js/);
-  assert.equal((html.match(/class="current-lot-bonus[" ]/g) || []).length, 7, slug);
+  const bonusKeys = slug === 'oferta-geral'
+    ? ['freela', 'orion', 'acompanhamento', 'entrevistas', 'sites']
+    : ['freela', 'claude', 'orion', 'acompanhamento', 'entrevistas', 'sites', 'claude-mes'];
+  assert.equal((html.match(/class="current-lot-bonus[" ]/g) || []).length, bonusKeys.length, slug);
   assert.match(html, /id="lote-atual"[^>]* hidden>/, slug);
-  for (const bonus of ['freela', 'claude', 'orion', 'acompanhamento', 'entrevistas', 'sites', 'claude-mes']) {
+  for (const bonus of bonusKeys) {
     assert.equal((html.match(new RegExp(`data-lot-bonus="${bonus}"`, 'g')) || []).length, 1, `${slug}: ${bonus}`);
   }
   const workshops = [...html.matchAll(/<article[^>]*data-lot-bonus="(?:entrevistas|sites)"[^>]*>([\s\S]*?)<\/article>/g)];
@@ -32,7 +35,12 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.match(html, /class="current-lot-bonus current-lot-bonus--holo" data-lot-bonus="sites"/, slug);
   assert.ok(html.indexOf('data-lot-bonus="sites"') < html.indexOf('data-lot-bonus="freela"'), `${slug}: workshop em primeiro`);
   assert.match(html, /Workshop Como Ser Aprovado em Qualquer Entrevista Dev/, slug);
-  assert.match(html, /Sorteio de 1 mês de Claude Pro/, slug);
+  if (slug === 'oferta-geral') {
+    assert.doesNotMatch(html, /Claude Pro|claude-mes|data-lot-bonus="claude"/, slug);
+  } else {
+    assert.match(html, /Sorteio de 1 mês de Claude Pro/, slug);
+    assert.match(html, /Sorteio de três meses de Claude Pro/, slug);
+  }
   assert.match(html, /Um ano de acesso ao Orion Pro, ferramenta de prospecção automatizada de clientes\./, slug);
   assert.doesNotMatch(html, /Workshop com Simone|Workshop Desenvolvendo Sites Premium/, slug);
   assert.match(html, /class="current-lot-period" data-lot-period/, slug);
