@@ -44,6 +44,7 @@ for (const [slug, price, checkout, ribbon] of offers) {
   assert.equal((html.split(checkout).length - 1), 10, slug);
   assert.equal((html.match(/data-boleto/g) || []).length, 10, slug);
   assert.equal((html.split('href="https://pay.tmb.com.br/DevemDobro/ZBS345545R7"').length - 1), 10, slug);
+  assert.equal((html.match(/data-boleto[^>]*>Pagar com boleto parcelado<\/a>\s*<p class="boleto-installment-note">Valores da parcela do boleto sujeitos a simulação<\/p>/g) || []).length, 10, slug);
   assert.match(html, new RegExp(`class="ecosystem-final-value">R\\$ ${price}<span>,00</span>`));
   assert.equal(html.includes('Condição Exclusiva para alunos por tempo limitado!'), ribbon, slug);
   if (ribbon) assert.ok(html.indexOf('offer-ribbon') < html.indexOf('hero-banner'), slug);

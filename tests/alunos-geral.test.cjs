@@ -16,6 +16,7 @@ assert.equal((html.match(/data-checkout/g) || []).length, 20);
 assert.equal((html.match(/>Quero minha condição de aluno<\/a>/g) || []).length, 10);
 assert.equal((html.match(/data-boleto/g) || []).length, 10);
 assert.equal((html.split('href="https://pay.tmb.com.br/DevemDobro/ZBS345545R7"').length - 1), 10);
+assert.equal((html.match(/data-boleto[^>]*>Pagar com boleto parcelado<\/a>\s*<p class="boleto-installment-note">Valores da parcela do boleto sujeitos a simulação<\/p>/g) || []).length, 10);
 assert.equal((html.match(/<section\b/g) || []).length, (base.match(/<section\b/g) || []).length);
 assert.match(html, /<p class="offer-ribbon">Condição Exclusiva para alunos por tempo limitado!<\/p>/);
 assert.match(html, /data-offer-period hidden/);
